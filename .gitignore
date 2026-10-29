@@ -16,6 +16,22 @@ app/.idea/
 *.hsp
 *.app
 
+# ---- 密钥与签名材料（严禁入库） ----
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.cer
+*.p7b
+*.jks
+*.keystore
+**/secrets.json
+**/secret*.json
+**/apikey*.txt
+**/api-key*.txt
+
 # ---- 临时文件 ----
 *.swp
 *~
