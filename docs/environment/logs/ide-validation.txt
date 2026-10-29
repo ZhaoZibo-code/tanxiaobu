@@ -1,0 +1,8 @@
+/Applications/DevEco-Studio.app: valid on disk
+/Applications/DevEco-Studio.app: satisfies its Designated Requirement
+
+codesign_exit=0
+/Applications/DevEco-Studio.app: accepted
+source=Notarized Developer ID
+
+spctl_exit=0

@@ -1,0 +1,14 @@
+/Users/ZZB/Desktop/game/app/entry/build/default/outputs/default/entry-default-unsigned.hap
+SHA-256: 78cd6bc4ceeeb03cccab095e28bf3347c5ffdc1eda4c0c709ceec9bae503c899
+bytes: 82559
+bundle: com.carbonfootprint.app; module: entry; SDK: OpenHarmony 5.0.0.71; min/target API: 12/12
+ets/modules.abc bytes: 10688
+Signing: unsigned; runtime validation is recorded separately.
+
+/Users/ZZB/Desktop/game/app/entry/build/default/outputs/ohosTest/entry-ohosTest-unsigned.hap
+SHA-256: c32cf7a6f373be01b1ec0a2bb977341fd729c3e2286ea2ffaeb0a62ea3cbfc3d
+bytes: 1031530
+bundle: com.carbonfootprint.app; module: entry_test; SDK: OpenHarmony 5.0.0.71; min/target API: 12/12
+ets/modules.abc bytes: 220712
+Signing: unsigned; runtime validation is recorded separately.
+

@@ -1,0 +1,52 @@
+{
+  "native": {
+    "apiVersion": "12",
+    "displayName": "Native",
+    "meta": {
+      "metaVersion": "3.0.0"
+    },
+    "path": "native",
+    "releaseType": "Release",
+    "version": "5.0.0.71"
+  },
+  "previewer": {
+    "apiVersion": "12",
+    "displayName": "Previewer",
+    "meta": {
+      "metaVersion": "3.0.0"
+    },
+    "path": "previewer",
+    "releaseType": "Release",
+    "version": "5.0.0.71"
+  },
+  "js": {
+    "apiVersion": "12",
+    "displayName": "Js",
+    "meta": {
+      "metaVersion": "3.0.0"
+    },
+    "path": "js",
+    "releaseType": "Release",
+    "version": "5.0.0.71"
+  },
+  "ets": {
+    "apiVersion": "12",
+    "displayName": "Ets",
+    "meta": {
+      "metaVersion": "3.0.0"
+    },
+    "path": "ets",
+    "releaseType": "Release",
+    "version": "5.0.0.71"
+  },
+  "toolchains": {
+    "apiVersion": "12",
+    "displayName": "Toolchains",
+    "meta": {
+      "metaVersion": "3.0.0"
+    },
+    "path": "toolchains",
+    "releaseType": "Release",
+    "version": "5.0.0.71"
+  }
+}

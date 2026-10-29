@@ -1,0 +1,14 @@
+M00 cleanup: exact generated paths only; source, final outputs, installed tools, dependencies and user IDE settings retained.
+Git check: current root is not a Git repository.
+Removed app/entry/.test: 5388867 bytes
+Removed app/entry/build/default/cache: 3104019 bytes
+Removed app/entry/build/default/generated: 4205 bytes
+Removed app/entry/build/default/intermediates: 1891672 bytes
+Removed docs/environment/logs/Screenshot_2026-10-27T224645.png: 197340 bytes
+Removed docs/environment/logs/handoff-ui-verified.png: 128309 bytes
+Removed docs/environment/logs/handoff-ui-initial.json: 5119 bytes
+Retained HAP SHA-256 78cd6bc4ceeeb03cccab095e28bf3347c5ffdc1eda4c0c709ceec9bae503c899  app/entry/build/default/outputs/default/entry-default-unsigned.hap
+Retained HAP SHA-256 c32cf7a6f373be01b1ec0a2bb977341fd729c3e2286ea2ffaeb0a62ea3cbfc3d  app/entry/build/default/outputs/ohosTest/entry-ohosTest-unsigned.hap
+Retained controlled native UI JSON evidence: handoff-ui-zero.json, handoff-ui-1.json, handoff-ui-2.json, handoff-ui-restart.json.
+Device temp cleanup: six exact /data/local/tmp/m00-* files removed using hdc; no other device paths touched.
+Pre-existing /tmp/m00-before-ide-migration retained: predecessor backup, not created in this handoff.

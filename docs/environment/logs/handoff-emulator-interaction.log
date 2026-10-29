@@ -1,0 +1,33 @@
+force stop process successfully.
+start ability successfully.
+DumpLayout saved to:/data/local/tmp/m00-zero.json
+FileTransfer finish, Size:5119, File count = 1, time:8ms rate:639.88kB/s
+OBSERVED handoff-ui-zero.json: 按钮点击次数：0
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest uiInput click 660 1428
+No Error
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest dumpLayout -p /data/local/tmp/m00-1.json -b com.carbonfootprint.app
+DumpLayout saved to:/data/local/tmp/m00-1.json
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 file recv /data/local/tmp/m00-1.json /Users/ZZB/Desktop/game/docs/environment/logs/handoff-ui-1.json
+FileTransfer finish, Size:5119, File count = 1, time:13ms rate:393.77kB/s
+OBSERVED handoff-ui-1.json: 按钮点击次数：1
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest uiInput click 660 1428
+No Error
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest dumpLayout -p /data/local/tmp/m00-2.json -b com.carbonfootprint.app
+DumpLayout saved to:/data/local/tmp/m00-2.json
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 file recv /data/local/tmp/m00-2.json /Users/ZZB/Desktop/game/docs/environment/logs/handoff-ui-2.json
+FileTransfer finish, Size:5119, File count = 1, time:10ms rate:511.90kB/s
+OBSERVED handoff-ui-2.json: 按钮点击次数：2
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest screenCap -p /data/local/tmp/m00-verified.png
+ScreenCap saved to /data/local/tmp/m00-verified.png
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 file recv /data/local/tmp/m00-verified.png /Users/ZZB/Desktop/game/docs/environment/logs/handoff-ui-verified.png
+FileTransfer finish, Size:128309, File count = 1, time:8ms rate:16038.62kB/s
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell aa force-stop com.carbonfootprint.app
+force stop process successfully.
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell aa start -a EntryAbility -b com.carbonfootprint.app
+start ability successfully.
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 shell uitest dumpLayout -p /data/local/tmp/m00-restart.json -b com.carbonfootprint.app
+DumpLayout saved to:/data/local/tmp/m00-restart.json
+$ /Users/ZZB/Library/OpenHarmony/Sdk/12/toolchains/hdc -t 127.0.0.1:5555 file recv /data/local/tmp/m00-restart.json /Users/ZZB/Desktop/game/docs/environment/logs/handoff-ui-restart.json
+FileTransfer finish, Size:5119, File count = 1, time:7ms rate:731.29kB/s
+OBSERVED handoff-ui-restart.json: 按钮点击次数：0
+PASS: actual native page 0 -> 1 -> 2; process restart resets to 0. No business or persistence claims.

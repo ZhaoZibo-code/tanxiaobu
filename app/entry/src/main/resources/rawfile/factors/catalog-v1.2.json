@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "version": "1.2.0",
+  "factors": [
+    {
+      "id": "cn-electricity-saved-2023",
+      "version": "1.0.0",
+      "name": "已节约电量对应的2023全国平均CO₂归因估算",
+      "unit": "kWh",
+      "gramsCo2ePerUnit": 530.6,
+      "originalValue": 0.5306,
+      "originalUnit": "kgCO2/kWh",
+      "source": {
+        "title": "2023年电力二氧化碳排放因子（公告2025年第47号附件，表1）",
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202512/W020251231726284332528.pdf",
+        "publisher": "生态环境部、国家统计局",
+        "publishedDate": "2025-12-31",
+        "retrievedDate": "2026-10-28",
+        "region": "中国全国平均口径（2023年）",
+        "boundary": "电力消费平均CO₂归因排放；只含CO₂，不含上游、设施生命周期及其他温室气体。",
+        "notes": "以有依据的已节约外购电量乘全国平均排放因子形成条件估算；不是官方直接减排系数、实时电网边际减排或绿电专属核算。CO₂的GWP为1，但本结果不代表完整生命周期CO₂e。"
+      },
+      "assumptions": [
+        "数量是同等服务水平下已确认节约的外购电量，不是节约后的总用电量。",
+        "采用2023全国平均，不宣称适用于任一省份的精确强度或当前电网。"
+      ],
+      "evidenceStatus": "documented"
+    },
+    {
+      "id": "cn-green-travel-avoided-km-2010",
+      "version": "1.0.0",
+      "name": "节能出行替代开车的每公里CO₂参考系数",
+      "unit": "km",
+      "gramsCo2ePerUnit": 184,
+      "originalValue": 0.184,
+      "originalUnit": "kgCO2/km",
+      "source": {
+        "title": "全民节能减排手册（政府完整转载，第17项：以节能方式出行200公里）",
+        "url": "https://emss.yantai.gov.cn/art/2010/5/11/art_4303_974128.html",
+        "publisher": "烟台市政府网站转载科技部组织编制手册",
+        "publishedDate": "2010-05-11",
+        "retrievedDate": "2026-10-29",
+        "region": "中国公众生活节能手册历史参考，非地区实测或当前出行结构",
+        "boundary": "原文只称二氧化碳；未区分步行、骑行与公交各自占比，未披露原研究年份与完整系统边界。",
+        "notes": "原句：按以上方式节能出行200公里，每人可以减少汽油消耗16.7升，相应减排二氧化碳36.8千克。本因子取同一示例的36.8÷200=0.184千克/公里，即184克/公里；不是把200公里示例拆成单一步行或骑行系数，也不代表任一城市当前平均值。"
+      },
+      "assumptions": [
+        "只输入替代私家车出行的那部分公里数，不输入总出行里程。",
+        "步行、骑行与公交共用一个混合参考系数，不区分各自占比。"
+      ],
+      "evidenceStatus": "documented"
+    },
+    {
+      "id": "cn-pork-waste-avoided-handbook-2010",
+      "version": "1.0.0",
+      "name": "手册少浪费猪肉的CO₂参考系数",
+      "unit": "kg",
+      "gramsCo2ePerUnit": 1400,
+      "originalValue": 1.4,
+      "originalUnit": "kgCO2/kg",
+      "source": {
+        "title": "全民节能减排手册（政府完整转载，第5项：减少畜产品浪费）",
+        "url": "https://emss.yantai.gov.cn/art/2010/5/11/art_4303_974128.html",
+        "publisher": "烟台市政府网站转载科技部组织编制手册",
+        "publishedDate": "2010-05-11",
+        "retrievedDate": "2026-10-28",
+        "region": "中国公众生活节能手册历史参考，非地区或单餐实测",
+        "boundary": "原文只称二氧化碳；未区分猪肉生熟、原研究年份或完整生产/加工/烹饪/处置系统边界，不补作全生命周期CO₂e。",
+        "notes": "原句：每人每年少浪费0.5千克猪肉，可节能约0.28千克标准煤，相应减排二氧化碳0.7千克。originalValue为同例0.7÷0.5=1.4kgCO₂/kg，克系数为1400；不是把一年减排重复授予每餐。仅将明确已避免浪费的猪肉量作科普参考，不把吃下的全部猪肉、整餐、熟饭或光盘次数当作避免浪费量。原文未细分生熟，不作生熟/份重换算；转载日期不是原研究年份，不代表本次精确实测或核证量。"
+      },
+      "assumptions": [
+        "输入通过光盘或按需取餐确实避免浪费且有依据确认的猪肉kg，不是本次吃肉总量或整餐重量。",
+        "不能辨明猪肉数量时不套此规则；不换算其他肉类、熟饭、份数或生熟重量，不鼓励超量进食。"
+      ],
+      "evidenceStatus": "documented"
+    },
+    {
+      "id": "cn-phone-reuse-ndrc-2022",
+      "version": "1.0.0",
+      "name": "闲置手机已完成二手交易的参考碳减排量",
+      "unit": "portion",
+      "gramsCo2ePerUnit": 25000,
+      "originalValue": 25,
+      "originalUnit": "kg碳减排量/portion",
+      "source": {
+        "title": "关于加快废旧物资循环利用体系建设的指导意见政策解读｜加快建设废旧物资循环利用体系 助力实现碳达峰碳中和目标",
+        "url": "https://www.ndrc.gov.cn/xxgk/jd/jd/202201/t20220125_1313163.html",
+        "publisher": "国家发展改革委网站（来源环资司，作者么新）",
+        "publishedDate": "2022-01-25",
+        "retrievedDate": "2026-10-28",
+        "region": "中国政策解读中的闲置手机二手交易参考，非单设备实测",
+        "boundary": "原文称碳减排量，未披露气体覆盖、GWP、研究年份或完整系统边界；保留原称谓，不推断为CO₂、元素碳或完整CO₂e。",
+        "notes": "原句：每一单闲置手机的二手交易，可以实现约25公斤的碳减排量。1 portion=1笔已完成闲置手机二手再利用交易；25kg×1000=25000g参考碳减排量，保留约数性质。公共gramsCo2ePerUnit字段仅承载参考值，不证明气体口径。不是挂单、拆解、材料回收或任意旧物系数；政策发布日不是原研究年份，不是按手机重量、型号或延寿年数作实测，不是核证碳信用。"
+      },
+      "assumptions": [
+        "一条记录仅一笔已完成的闲置手机二手再利用交易，quantity必须为1。",
+        "不登记挂单未售、送去拆解或其他旧物；同一交易不重复登记，应用核算本身不验证订单或自动查重。"
+      ],
+      "evidenceStatus": "documented"
+    }
+  ],
+  "rules": [
+    {
+      "id": "saved-electricity-cn-2023",
+      "version": "1.0.0",
+      "category": "energy_water",
+      "name": "已节约外购电量（全国2023均值参考）",
+      "inputUnit": "kWh",
+      "minQuantity": 0.001,
+      "maxQuantity": 1000,
+      "mode": "direct_reduction",
+      "reductionFactorId": "cn-electricity-saved-2023",
+      "baselineFactorId": null,
+      "actualFactorId": null,
+      "baselineLabel": "同等服务水平下本来需要的外购电量",
+      "actualLabel": "已经减少的外购电量",
+      "assumptions": [
+        "只输入有依据确认的节电差值，不由使用时长猜测电量，不重复登记同一节电量。",
+        "数量区间是应用单条录入限制，不是来源研究给出的科学阈值。"
+      ],
+      "confirmationText": "我确认输入的是有依据的已节约外购电量而非总用电量，并理解结果仅按2023全国平均CO₂因子估算，不是实时边际减排或核证量。"
+    },
+    {
+      "id": "green-travel-avoided-km-2010",
+      "version": "1.0.0",
+      "category": "travel",
+      "name": "步行 / 骑行 / 公交替代开车（手册历史参考）",
+      "inputUnit": "km",
+      "minQuantity": 0.1,
+      "maxQuantity": 100,
+      "mode": "direct_reduction",
+      "reductionFactorId": "cn-green-travel-avoided-km-2010",
+      "baselineFactorId": null,
+      "actualFactorId": null,
+      "baselineLabel": "原本会开车的里程",
+      "actualLabel": "实际步行、骑行或公交的里程",
+      "assumptions": [
+        "只记录替代开车的那部分里程，不把日常总出行里程当减排。",
+        "数量区间是应用单条录入限制，不是来源研究给出的科学阈值。"
+      ],
+      "confirmationText": "我确认输入的是替代私家车出行的公里数，不是总出行里程；系数按手册200公里示例线性归一化为184克/公里，不区分步行、骑行与公交，仅作科普参考。"
+    },
+    {
+      "id": "avoided-pork-waste-handbook-2010",
+      "version": "1.0.0",
+      "category": "food",
+      "name": "光盘/按需取餐减少猪肉浪费（手册参考）",
+      "inputUnit": "kg",
+      "minQuantity": 0.001,
+      "maxQuantity": 10,
+      "mode": "direct_reduction",
+      "reductionFactorId": "cn-pork-waste-avoided-handbook-2010",
+      "baselineFactorId": null,
+      "actualFactorId": null,
+      "baselineLabel": "原本会被浪费的明确猪肉量",
+      "actualLabel": "光盘或按需取餐已避免浪费的猪肉量",
+      "assumptions": [
+        "只登记有依据确认的已避免猪肉浪费kg，不重复登记，不因光盘就默认整餐生产被避免。",
+        "数量区间是应用单条录入限制，不是来源科学阈值；按需取餐，不鼓励为积分多吃。"
+      ],
+      "confirmationText": "我确认能辨明并有依据确认本次通过光盘/按需取餐已避免浪费的猪肉kg，不是总吃肉量、整餐、熟饭或份数；理解手册未区分生熟或完整系统边界，不作换算，仅作参考，不鼓励超量进食。"
+    },
+    {
+      "id": "completed-phone-reuse-ndrc-2022",
+      "version": "1.0.0",
+      "category": "recycling",
+      "name": "闲置手机已完成二手再利用交易（政策参考）",
+      "inputUnit": "portion",
+      "minQuantity": 1,
+      "maxQuantity": 1,
+      "mode": "direct_reduction",
+      "reductionFactorId": "cn-phone-reuse-ndrc-2022",
+      "baselineFactorId": null,
+      "actualFactorId": null,
+      "baselineLabel": "闲置手机未进入本笔二手再利用交易",
+      "actualLabel": "一笔已经完成的闲置手机二手再利用交易",
+      "assumptions": [
+        "1份就是1笔已完成闲置手机二手再利用交易，一次仅接受1份，不以手机kg或其他旧物换算。",
+        "约25kg是政策解读参考，不是本设备实测；不登记挂单、拆解或重复交易，不宣称系统已校验订单。"
+      ],
+      "confirmationText": "我确认这是1笔已完成的闲置手机二手再利用交易，1份=1笔，不是挂单未售、拆解回收或其他旧物，且未重复登记；理解约25kg仅是未披露完整气体/系统边界的科普参考，不是核证量。"
+    }
+  ]
+}

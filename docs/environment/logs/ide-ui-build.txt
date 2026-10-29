@@ -1,0 +1,18 @@
+Observed with native UI accessibility on 2026-10-27 20:43 Asia/Shanghai.
+DevEco Studio 26.0.0.851, /Applications/DevEco-Studio.app
+Opened /Users/ZZB/Desktop/game/app.
+Initial sync failed: 工程结构及配置需要升级后才能使用。
+Tools > 迁移助手 > 5.0.0 > 迁移 (source snapshot made before migration).
+Migration changed only project model/dependency configuration; SDK remains OpenHarmony API 12.
+Project Structure showed Compile SDK 12 and Compatible SDK 12.
+Project Node changed to ~/Library/OpenHarmony/Tools/node-v18.20.8-darwin-arm64 (18.20.8).
+After applying, UI showed 同步项目完成，耗时3 s 387 ms.
+Build toolbar > 编译 Hap(s)/APP(s) > 编译 Hap(s).
+Build output command:
+/Applications/DevEco-Studio.app/Contents/tools/node/bin/node /Applications/DevEco-Studio.app/Contents/tools/hvigor/bin/hvigorw.js --mode module -p product=default assembleHap --analyze=normal --parallel --incremental --daemon
+Output included CompileArkTS, PackageHap, BUILD SUCCESSFUL.
+进程已结束，退出代码为 0
+成功构建 1 个模块：模块'entry@default'
+Warnings retained: --pkg-sdk-info-path is invalid!; No signingConfig found for product default.
+Toolbar showed 无设备. No installation or app button test performed.
+Note: IDE bootstrap process uses its bundled Node; project compilation Node was separately configured to 18.20.8.

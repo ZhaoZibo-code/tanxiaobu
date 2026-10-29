@@ -1,0 +1,22 @@
+# ---- macOS ----
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ---- OpenHarmony / DevEco 构建产物 ----
+app/**/build/
+app/**/.test/
+app/**/.hvigor/
+app/oh_modules/
+app/**/oh_modules/
+app/local.properties
+app/.idea/
+*.hap
+*.hsp
+*.app
+
+# ---- 临时文件 ----
+*.swp
+*~
+.DS_Store?

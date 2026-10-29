@@ -1,0 +1,15 @@
+Recorded: 2026-10-27 20:46:29 CST
+ProductName:		macOS
+ProductVersion:		15.8
+BuildVersion:		24H23
+arm64
+v18.20.8
+10.8.2
+openjdk version "17.0.21" 2026-10-20
+OpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)
+OpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)
+26.0.0.630
+6.26.8
+v24.14.1
+Ver: 3.1.0b
+[Empty]

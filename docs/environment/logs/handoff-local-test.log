@@ -1,0 +1,28 @@
+> hvigor [32mUP-TO-DATE :entry:default@PreBuild...  [39m
+> hvigor [32mFinished :entry:default@CreateModuleInfo... after 1 ms [39m
+> hvigor [32mFinished :entry:default@CreateBuildProfile... after 2 ms [39m
+> hvigor [32mFinished :entry:default@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GenerateUnitTestTemplate...  [39m
+> hvigor [32mFinished :entry:default@GeneratePkgContextInfo... after 6 ms [39m
+> hvigor [32mFinished :entry:default@MergeProfile... after 4 ms [39m
+> hvigor [32mFinished :entry:default@ProcessRouterMap... after 2 ms [39m
+> hvigor [32mFinished :entry:default@ProcessShareConfig... after 1 ms [39m
+> hvigor [32mFinished :entry:default@ProcessStartupConfig... after 1 ms [39m
+> hvigor [32mFinished :entry:default@ProcessProfile... after 54 ms [39m
+> hvigor [32mFinished :entry:default@GenerateLoaderJson... after 5 ms [39m
+> hvigor [32mFinished :entry:default@UnitTestProcessProfile... after 1 ms [39m
+> hvigor [32mFinished :entry:default@ProcessResource... after 3 ms [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 43 ms [39m
+> hvigor [32mFinished :entry:default@ReplaceUnitTestIndexFile... after 2 ms [39m
+> hvigor [32mFinished :entry:default@BuildUnitTestHook... after 1 ms [39m
+> hvigor [32mFinished :entry:default@UnitTestArkTS... after 2 s 996 ms [39m
+> hvigor [32mDarwin[39m
+[32m[2026-10-27T22:42:02.508] [INFO] default - [39mFinished write html report
+> hvigor [32mFinished :entry:default@GenerateUnitTestResult... after 1 s 854 ms [39m
+> hvigor [32mFinished :entry:test... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 6 s 937 ms [39m
+
+20 tasks in total: 18 executed, 2 up-to-date
+[32m[2026-10-27T22:42:02.535] [INFO] default - [39mFinished write html report
+[32m[2026-10-27T22:42:02.537] [INFO] default - [39mFinished file written successfully
+[32m[2026-10-27T22:42:02.537] [INFO] default - [39mFinished file written successfully

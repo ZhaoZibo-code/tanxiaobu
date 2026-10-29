@@ -1,0 +1,6 @@
+Scope: M00 application tag only; no full-system log collection.
+Initial query: hdc -t 127.0.0.1:5555 shell hilog -x -T M00,testTag -z 60
+Result: Mutlti commands can't be used in combination [CODE: -31]
+Corrected query: hdc -t 127.0.0.1:5555 shell hilog -x -T M00
+Result: command exited 0, no matching log output.
+This limited empty query does not establish absence of all runtime errors.

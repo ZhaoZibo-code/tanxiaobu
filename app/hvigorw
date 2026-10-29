@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# M00 convenience shim. The official IDE migration removed the legacy wrapper.
+# Use the verified DevEco-bundled Hvigor; SDK/API remain in build-profile.json5.
+set -e
+M00_APP_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$M00_APP_DIR"
+source "$M00_APP_DIR/scripts/env.sh"
+exec "$DEVECO_STUDIO_HOME/Contents/tools/hvigor/bin/hvigorw" "$@"

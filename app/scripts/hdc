@@ -1,0 +1,8 @@
+#!/bin/sh
+# Keep device debugging on the same HDC generation as DevEco / API 26.
+# Compilation still uses the OpenHarmony API 12 SDK configured in env.sh.
+runtime_hdc="${DEVECO_STUDIO_HOME:-/Applications/DevEco-Studio.app}/Contents/sdk/default/openharmony/toolchains/hdc"
+if [ ! -x "$runtime_hdc" ]; then
+  runtime_hdc="${OHOS_SDK_HOME:-$HOME/Library/OpenHarmony/Sdk}/12/toolchains/hdc"
+fi
+exec "$runtime_hdc" "$@"

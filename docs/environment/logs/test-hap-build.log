@@ -1,0 +1,25 @@
+> hvigor [32mUP-TO-DATE :entry:ohosTest@PreBuild...  [39m
+> hvigor [32mFinished :entry:ohosTest@GenerateMetadata... after 8 ms [39m
+> hvigor [32mFinished :entry:ohosTest@CreateBuildProfile... after 3 ms [39m
+> hvigor [32mFinished :entry:ohosTest@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:ohosTest@GenerateLoaderJson... after 3 ms [39m
+> hvigor [32mFinished :entry:ohosTest@MergeProfile... after 3 ms [39m
+> hvigor [32mFinished :entry:ohosTest@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:ohosTest@MakePackInfo... after 7 ms [39m
+> hvigor [32mFinished :entry:ohosTest@ProcessProfile... after 52 ms [39m
+> hvigor [32mFinished :entry:ohosTest@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :entry:ohosTest@ProcessResource... after 5 ms [39m
+> hvigor [32mFinished :entry:ohosTest@ProcessLibs... after 7 ms [39m
+> hvigor [32mFinished :entry:ohosTest@CompileResource... after 44 ms [39m
+> hvigor [32mFinished :entry:ohosTest@DoNativeStrip... after 3 ms [39m
+> hvigor [32mFinished :entry:ohosTest@OhosTestBuildJS... after 2 ms [39m
+> hvigor [32mFinished :entry:ohosTest@CacheNativeLibs... after 2 ms [39m
+> hvigor [32mFinished :entry:ohosTest@OhosTestCompileArkTS... after 3 s 645 ms [39m
+> hvigor [32mFinished :entry:ohosTest@OhosTestCopyMockConfigJson... after 1 ms [39m
+> hvigor [32mFinished :entry:ohosTest@PackageHap... after 178 ms [39m
+> hvigor [33mWARN: No signingConfig found for product default[39m
+> hvigor [32mFinished :entry:ohosTest@SignHap... after 2 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 4 s 697 ms [39m
+
+EXIT_CODE=0

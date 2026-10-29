@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Modern ohpm uses its bundled Node 24; API 12 compilation uses Node 18.
+set -e
+export DEVECO_STUDIO_HOME="${DEVECO_STUDIO_HOME:-/Applications/DevEco-Studio.app}"
+export NODE_HOME="$DEVECO_STUDIO_HOME/Contents/tools/node"
+export PATH="$NODE_HOME/bin:$PATH"
+exec "$DEVECO_STUDIO_HOME/Contents/tools/ohpm/bin/ohpm" "$@"

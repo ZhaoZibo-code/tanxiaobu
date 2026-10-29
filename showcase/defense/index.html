@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>碳小步 · 碳足迹项目答辩</title>
+<style>
+/* ============================================================
+   碳小步 · 答辩演示稿
+   设计主线：右侧固定「演示舞台」——模拟器置顶后正好落在这里
+   ============================================================ */
+
+:root{
+  --paper:#F7F5EC;
+  --paper-2:#F1EDDF;
+  --ink:#16352B;
+  --ink-2:#4B6559;
+  --mute:#5F6E64;
+  --green:#1E5B46;
+  --green-d:#0F3027;
+  --moss:#DCE7D3;
+  --moss-2:#E9EFE2;
+  --amber:#B4762F;
+  --amber-2:#E8D7B4;
+  --line:rgba(22,53,43,.14);
+  --line-2:rgba(22,53,43,.07);
+
+  --stage:33%;
+  --pad-out:7vw;
+  --pad-in:3.2vw;
+
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC","Noto Serif CJK SC","SimSun",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+
+  --ease:cubic-bezier(.22,.68,.28,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+p,h1,h2,h3{margin:0}
+
+/* 纸张颗粒 */
+body::after{
+  content:"";position:fixed;inset:0;z-index:900;pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- 版式 ---------- */
+.deck{position:fixed;inset:0}
+
+.slide{
+  position:absolute;inset:0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) var(--stage);
+  opacity:0;visibility:hidden;
+  pointer-events:none;
+  transition:opacity .55s var(--ease),visibility .55s;
+  background:var(--paper);
+}
+.slide.on{opacity:1;visibility:visible;pointer-events:auto}
+
+.content{
+  display:flex;flex-direction:column;
+  padding:3.6vh var(--pad-in) 9.6vh var(--pad-out);
+  min-width:0;
+  position:relative;z-index:2;
+}
+body.stage-left .slide{grid-template-columns:var(--stage) minmax(0,1fr)}
+body.stage-left .content{order:2;padding:3.6vh var(--pad-out) 9.6vh var(--pad-in)}
+body.stage-left .stage{order:1}
+
+.main{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+/* ---------- 顶部 / 底部 ---------- */
+.top{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);
+  font-size:clamp(9.5px,1.02vmin,11.5px);
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);
+  padding-bottom:2.4vh;
+  border-bottom:1px solid var(--line-2);
+}
+.brand{display:flex;align-items:center;gap:.7em}
+.brand i{
+  width:1.9em;height:1.9em;border:1px solid rgba(30,91,70,.45);border-radius:50%;
+  display:grid;place-items:center;font-style:normal;font-size:.95em;
+  color:var(--green);letter-spacing:0;
+}
+.foot{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  font-family:var(--mono);
+  font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.1em;color:var(--mute);
+  padding-top:2.8vh;border-top:1px solid var(--line-2);
+}
+
+/* ---------- 字体层级 ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:clamp(9.5px,1.05vmin,11.5px);
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);font-weight:600;
+  margin-bottom:2.4vh;
+  display:flex;align-items:center;gap:.9em;
+}
+.eyebrow::before{content:"";width:2.2em;height:1px;background:currentColor;opacity:.55}
+
+h1{
+  font-family:var(--serif);
+  font-size:clamp(44px,8.6vmin,98px);
+  line-height:1.12;letter-spacing:.005em;font-weight:600;
+}
+h2{
+  font-family:var(--serif);
+  font-size:clamp(31px,6.1vmin,68px);
+  line-height:1.26;letter-spacing:.01em;font-weight:600;
+  text-wrap:balance;
+}
+h2 em,h1 em{font-style:normal;color:var(--amber)}
+h3{
+  font-size:clamp(15px,1.85vmin,21px);
+  line-height:1.5;font-weight:600;letter-spacing:.01em;
+  text-wrap:balance;
+}
+.lead{
+  text-wrap:pretty;
+  font-size:clamp(14.5px,1.78vmin,19.5px);
+  line-height:1.95;color:var(--ink-2);
+  max-width:34em;margin-top:3.4vh;
+}
+.note{
+  font-size:clamp(11.5px,1.36vmin,15px);
+  line-height:1.85;color:var(--mute);max-width:38em;
+}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- 演示舞台 ---------- */
+.stage{
+  position:relative;
+  border-left:1px solid var(--line-2);
+  overflow:hidden;
+  display:grid;place-items:center;
+}
+body.stage-left .stage{border-left:0;border-right:1px solid var(--line-2)}
+
+.stage::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(46% 38% at 50% 46%,rgba(30,91,70,.03),rgba(30,91,70,0) 72%);
+}
+.stage::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:min(26vw,480px);height:min(26vw,480px);
+  translate:-50% -50%;
+  border:1px solid rgba(30,91,70,.075);border-radius:50%;
+}
+
+/* ---------- 嵌入式设备 ---------- */
+.device{
+  position:fixed;z-index:6;
+  padding:5px;border-radius:26px;
+  background:#0B2620;
+  box-shadow:0 32px 80px rgba(11,38,32,.34),0 2px 8px rgba(11,38,32,.28);
+  opacity:0;pointer-events:none;
+  transition:opacity .5s var(--ease);
+  touch-action:none;
+}
+body.live .device{opacity:1;pointer-events:auto;cursor:grab}
+body.live .device:active{cursor:grabbing}
+.device .screen{
+  position:relative;width:100%;height:100%;
+  border-radius:21px;overflow:hidden;background:#0B2620;
+}
+.device img{
+  width:100%;height:100%;display:block;object-fit:fill;
+  -webkit-user-drag:none;user-select:none;
+}
+.device .ripple{
+  position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;
+  border-radius:50%;background:rgba(255,255,255,.6);
+  pointer-events:none;opacity:0;
+}
+.device .ripple.go{animation:rip .55s ease-out}
+@keyframes rip{
+  from{transform:scale(.4);opacity:.75}
+  to{transform:scale(4.2);opacity:0}
+}
+body.live .brackets i,
+body.live .stage-hint,
+body.live .stage::after{opacity:0}
+
+.brackets{position:absolute;inset:8% 7%;pointer-events:none}
+.brackets i{
+  position:absolute;width:20px;height:20px;
+  border:1px solid rgba(30,91,70,.3);
+  transition:opacity .4s var(--ease);
+}
+.brackets i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
+.brackets i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.brackets i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}
+.brackets i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+
+.stage-tag{
+  position:absolute;top:3.2vh;left:50%;translate:-50% 0;
+  font-family:var(--mono);font-size:clamp(9px,.95vmin,10.5px);
+  letter-spacing:.24em;text-transform:uppercase;color:rgba(30,91,70,.42);
+  white-space:nowrap;transition:opacity .4s var(--ease);
+}
+.stage-tag b{color:rgba(180,118,47,.85);font-weight:600}
+.stage-hint{
+  position:absolute;bottom:3.4vh;left:50%;translate:-50% 0;
+  width:80%;text-align:center;
+  font-size:clamp(10px,1.05vmin,12px);line-height:1.7;
+  color:var(--ink-2);
+  transition:opacity .4s var(--ease);
+}
+/* 未连接模拟器时，把这一页的演示提示做成可读的卡片，而不是留一片空白 */
+body:not(.live) .stage-hint{
+  top:50%;bottom:auto;translate:-50% -50%;
+  width:74%;padding:2.8vh 1.7vw;
+  font-size:clamp(12px,1.34vmin,15px);line-height:1.95;
+  border:1px solid var(--line);border-radius:4px;
+  background:rgba(255,255,255,.45);
+}
+body:not(.live) .stage-hint::before{
+  content:"演示提示";
+  display:block;margin-bottom:1.4vh;
+  font-family:var(--mono);font-size:.76em;letter-spacing:.2em;
+  color:var(--amber);
+}
+
+body.no-guides .brackets i,
+body.no-guides .stage-tag,
+body.no-guides .stage-hint{opacity:0}
+
+/* 封面舞台：同心环 */
+.cover{
+  background:
+    radial-gradient(72% 72% at 10% -4%,rgba(122,166,122,.18),rgba(122,166,122,0) 58%),
+    var(--green-d);
+  color:#F1F4E7;
+}
+.cover .top{border-color:rgba(241,244,231,.18);color:rgba(241,244,231,.66)}
+.cover .brand i{border-color:rgba(241,244,231,.4);color:#CFE0C6}
+.cover .foot{border-color:rgba(241,244,231,.18);color:rgba(241,244,231,.66)}
+.cover .lead{color:rgba(232,240,220,.72)}
+.cover .eyebrow{color:#C9A45E}
+.cover h1 em{color:#D8B26A}
+.cover .stage{border-color:rgba(241,244,231,.1)}
+.cover .stage::before{background:none}
+.cover .stage::after{display:none}
+.rings{position:absolute;left:50%;top:50%;translate:-50% -50%;width:150%;aspect-ratio:1}
+.rings span{
+  position:absolute;left:50%;top:50%;translate:-50% -50%;
+  border:1px solid rgba(190,214,172,.16);border-radius:50%;
+}
+.rings span:nth-child(1){width:96%;height:96%}
+.rings span:nth-child(2){width:74%;height:74%}
+.rings span:nth-child(3){width:52%;height:52%;border-color:rgba(190,214,172,.24)}
+.rings span:nth-child(4){width:30%;height:30%;border:0;background:radial-gradient(circle,rgba(183,204,157,.16),rgba(183,204,157,0) 70%)}
+.cover .stage-tag{color:rgba(232,240,220,.4)}
+.cover .stage-hint{color:rgba(232,240,220,.35)}
+.cover .brackets i{border-color:rgba(232,240,220,.22)}
+.cover .kicker{
+  margin-top:4.2vh;display:flex;gap:1.8em;flex-wrap:wrap;
+  font-family:var(--mono);font-size:clamp(10px,1.1vmin,12.5px);
+  letter-spacing:.14em;color:rgba(201,222,190,.66);
+}
+.cover .kicker span{display:flex;align-items:center;gap:.7em}
+.cover .kicker span::before{content:"";width:4px;height:4px;border-radius:50%;background:rgba(201,164,94,.9)}
+
+/* ---------- 纸面层次 ---------- */
+.slide:not(.cover){
+  background:
+    radial-gradient(62% 52% at 0% 4%,rgba(30,91,70,.055),rgba(30,91,70,0) 62%),
+    var(--paper);
+}
+
+/* ---------- 通用组件 ---------- */
+.rule{width:44px;height:2px;background:var(--amber);margin:3.2vh 0}
+.hair{height:1px;background:var(--line-2)}
+
+/* 三栏 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4vw;margin-top:6.6vh}
+.trio > div{border-top:1px solid var(--line);padding-top:3.2vh}
+.trio .idx{
+  font-family:var(--mono);font-size:clamp(10px,1.1vmin,12px);
+  letter-spacing:.12em;color:var(--amber);display:block;margin-bottom:2.4vh;
+}
+.trio h3{margin-bottom:1.1vh}
+.trio p{text-wrap:pretty;font-size:clamp(13px,1.52vmin,16.5px);line-height:1.85;color:var(--ink-2)}
+
+/* 竖排条目 */
+.rows{margin-top:5.4vh;display:flex;flex-direction:column}
+.row{
+  display:grid;grid-template-columns:4.2em 1fr;gap:1.6vw;
+  padding:3.4vh 0;border-top:1px solid var(--line-2);align-items:baseline;
+}
+.row:first-child{border-top:1px solid var(--line)}
+.row .num{
+  font-family:var(--serif);font-size:clamp(20px,2.6vmin,30px);
+  color:var(--amber);line-height:1;font-weight:600;
+}
+.row .en{
+  display:block;font-family:var(--mono);font-size:clamp(10px,1.1vmin,12px);
+  letter-spacing:.16em;color:var(--mute);margin-top:.75em;
+}
+.row p{text-wrap:pretty;font-size:clamp(13px,1.5vmin,16px);line-height:1.8;color:var(--ink-2);margin-top:.8vh;max-width:26em}
+
+/* 时间轴 */
+.timeline{margin-top:5vh;position:relative;padding-left:2.6vw}
+.timeline::before{
+  content:"";position:absolute;left:calc(2.6vw - 1px);top:.6em;bottom:2.4em;
+  width:1px;background:linear-gradient(to bottom,var(--line),rgba(22,53,43,.04));
+}
+.tl{
+  position:relative;padding:0 0 4.2vh 2.2vw;
+  display:grid;grid-template-columns:1fr auto;gap:1.6vw;align-items:start;
+}
+.tl::before{
+  content:"";position:absolute;left:-.42em;top:.62em;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--green);
+}
+.tl.hot::before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 4px rgba(180,118,47,.12)}
+.tl .t{font-size:clamp(14px,1.7vmin,18.5px);font-weight:600;letter-spacing:.01em}
+.tl .d{text-wrap:pretty;font-size:clamp(12.5px,1.44vmin,15.5px);line-height:1.8;color:var(--ink-2);margin-top:.5vh;max-width:30em}
+.tl .n{
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.1em;color:var(--mute);padding-top:.55em;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:.5em;
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.1em;padding:.42em .8em;border-radius:2em;
+  border:1px solid rgba(180,118,47,.3);color:var(--amber);
+  background:rgba(232,215,180,.22);white-space:nowrap;
+}
+.chip.off{border-color:var(--line);color:var(--mute);background:rgba(22,53,43,.03)}
+
+/* 公式卡 */
+.eqcard{
+  margin-top:5.4vh;padding:4.2vh 2.2vw 3.8vh;
+  background:linear-gradient(160deg,var(--moss-2),rgba(220,231,211,.45));
+  border:1px solid rgba(30,91,70,.1);
+  border-radius:6px;position:relative;overflow:hidden;
+}
+.eqcard::after{
+  content:"";position:absolute;right:-8%;top:-30%;
+  width:42%;aspect-ratio:1;border-radius:50%;
+  border:1px solid rgba(30,91,70,.06);
+}
+.eqcard .mini{
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.14em;color:var(--mute);text-transform:uppercase;
+}
+.eq{
+  font-family:var(--mono);font-size:clamp(21px,3.5vmin,42px);
+  letter-spacing:-.01em;margin:2.6vh 0 2.2vh;white-space:nowrap;
+}
+.eq s{text-decoration:none;color:var(--mute);margin:0 .35em}
+.eq b{color:var(--green);font-weight:600;font-size:1.34em;letter-spacing:-.02em}
+.eq u{text-decoration:none;font-size:.52em;color:var(--mute);margin-left:.5em;letter-spacing:.06em}
+.eqcard .note{position:relative;z-index:1}
+
+.snapshot{display:flex;align-items:center;gap:.7vw;margin-top:3vh;flex-wrap:wrap}
+.snapshot .mini{
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.14em;color:var(--mute);margin-right:.6em;
+}
+.snap-chip{
+  font-family:var(--mono);font-size:clamp(9.5px,1.02vmin,11.5px);
+  padding:.45em .85em;border:1px solid var(--line);border-radius:3px;
+  color:var(--ink-2);background:rgba(255,255,255,.5);
+}
+.snap-chip.freezed{border-color:rgba(180,118,47,.35);color:var(--amber);background:rgba(232,215,180,.25)}
+.snapshot .arr{color:var(--mute);font-size:.8em}
+
+/* 火花 */
+.sparkwrap{margin-top:5vh}
+.week{display:flex;gap:1.15vw}
+.week .d{display:flex;flex-direction:column;align-items:center;gap:1.5vh}
+.week .d b{
+  width:clamp(36px,4.6vmin,58px);height:clamp(36px,4.6vmin,58px);
+  border-radius:50%;display:grid;place-items:center;
+  background:rgba(22,53,43,.055);
+  color:rgba(22,53,43,.16);
+  font-size:clamp(18px,2.6vmin,32px);font-weight:400;line-height:1;
+}
+.week .d.lit b{
+  background:linear-gradient(150deg,#F5E4C2,#E5C689);
+  color:#8A5416;
+  box-shadow:0 0 0 1px rgba(180,118,47,.2),0 8px 22px rgba(180,118,47,.18);
+}
+.week .d i{
+  font-style:normal;font-family:var(--mono);
+  font-size:clamp(10px,1.15vmin,12.5px);letter-spacing:.12em;color:var(--mute);
+}
+.sparkcap{
+  font-family:var(--mono);font-size:clamp(9.5px,1.05vmin,11.5px);
+  letter-spacing:.14em;color:var(--mute);margin-top:2.6vh;
+}
+
+/* 架构 */
+.arch{display:flex;align-items:stretch;gap:1vw;margin-top:4.4vh}
+.node{
+  flex:1;padding:2.2vh 1.1vw;border:1px solid var(--line);
+  background:rgba(255,255,255,.55);border-radius:4px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.node b{font-size:clamp(13px,1.55vmin,17px);font-weight:600;letter-spacing:.01em}
+.node small{
+  display:block;font-family:var(--mono);font-size:clamp(9px,.98vmin,11px);
+  letter-spacing:.06em;color:var(--mute);margin-top:.7vh;line-height:1.6;
+}
+.node.acc{border-color:rgba(30,91,70,.3);background:rgba(220,231,211,.5)}
+.arch .to{
+  align-self:center;font-family:var(--mono);color:var(--mute);
+  font-size:clamp(11px,1.2vmin,14px);
+}
+.bracket{
+  margin-top:1.4vh;padding-top:1.2vh;border-top:1px dashed rgba(30,91,70,.28);
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.14em;color:var(--green);text-align:center;
+}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:2vw;margin-top:3.4vh}
+.duo > div{border-left:2px solid rgba(30,91,70,.2);padding-left:1.1vw}
+.duo h3{font-size:clamp(13px,1.55vmin,17px);margin-bottom:.7vh}
+.duo p{text-wrap:pretty;font-size:clamp(12.5px,1.4vmin,15px);line-height:1.8;color:var(--ink-2)}
+
+/* 证据表 */
+.evidence{margin-top:5.2vh}
+.ev{
+  display:grid;grid-template-columns:1.5em 7.4em 1fr auto;gap:1.2vw;
+  align-items:center;padding:2.75vh 0;border-top:1px solid var(--line-2);
+}
+.ev:first-child{border-top:1px solid var(--line)}
+.ev .dot{width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.85}
+.ev .dot.warn{background:var(--amber)}
+.ev .k{font-size:clamp(13px,1.5vmin,16px);font-weight:600}
+.ev .v{font-size:clamp(12.5px,1.4vmin,15px);color:var(--ink-2);line-height:1.7}
+.ev .s{
+  font-family:var(--mono);font-size:clamp(9.5px,1.02vmin,11.5px);
+  letter-spacing:.1em;color:var(--mute);white-space:nowrap;
+}
+.ev .s b{color:var(--green);font-weight:600}
+
+/* 家庭 */
+.relaybar{height:5px;background:rgba(22,53,43,.08);border-radius:5px;overflow:hidden;margin-top:1.6vh;max-width:30em}
+.relaybar div{height:100%;width:66.6%;background:var(--green);border-radius:5px}
+.relaymeta{
+  display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11px);
+  letter-spacing:.12em;color:var(--mute);margin-top:1.4vh;max-width:26vw;
+}
+
+
+/* ---------- 深色实演页 ---------- */
+.slide.dark{
+  background:
+    radial-gradient(64% 58% at 8% -6%,rgba(120,164,120,.2),rgba(120,164,120,0) 58%),
+    var(--green-d);
+  color:#EFF3E4;
+}
+.dark .top,.dark .foot{border-color:rgba(241,244,231,.18);color:rgba(241,244,231,.68)}
+.dark .brand i{border-color:rgba(241,244,231,.36);color:#CFE0C6}
+.dark .eyebrow{color:#C9A45E}
+.dark h2 em{color:#D8B26A}
+.dark .lead{color:rgba(232,240,220,.7)}
+.dark .timeline::before{background:linear-gradient(to bottom,rgba(232,240,220,.22),rgba(232,240,220,.03))}
+.dark .tl::before{background:var(--green-d);border-color:#9DBE93}
+.dark .tl.hot::before{background:#D8B26A;border-color:#D8B26A;box-shadow:0 0 0 4px rgba(216,178,106,.14)}
+.dark .tl .t{color:#F2F5E8}
+.dark .tl .d{color:rgba(232,240,220,.62)}
+.dark .tl .n{color:rgba(232,240,220,.3)}
+.dark .chip{border-color:rgba(216,178,106,.42);color:#D8B26A;background:rgba(216,178,106,.1)}
+.dark .stage{border-color:rgba(241,244,231,.07)}
+.dark .stage::before{background:radial-gradient(46% 38% at 50% 46%,rgba(170,205,160,.1),rgba(170,205,160,0) 72%)}
+.dark .stage::after{border-color:rgba(206,224,190,.12)}
+.dark .stage-tag{color:rgba(232,240,220,.38)}
+.dark .stage-hint{color:rgba(232,240,220,.32)}
+.dark .brackets i{border-color:rgba(232,240,220,.16)}
+
+/* 导航在深色页上的反色 */
+body.on-dark .nav{color:rgba(232,240,220,.5)}
+body.on-dark .nav .arrows button{border-color:rgba(232,240,220,.18);color:#EFF3E4}
+body.on-dark .nav .arrows button:hover:not(:disabled){background:rgba(232,240,220,.1);border-color:rgba(232,240,220,.36)}
+body.on-dark .ticks button{background:rgba(232,240,220,.18)}
+body.on-dark .ticks button.done{background:rgba(232,240,220,.5)}
+body.on-dark .hints button:hover{color:#D8B26A}
+
+/* 结束页 */
+.end{
+  background:
+    radial-gradient(62% 52% at 0% 4%,rgba(30,91,70,.07),rgba(30,91,70,0) 62%),
+    var(--moss-2);
+}
+.end h2{font-size:clamp(32px,5.6vmin,64px)}
+.end .stage::before{background:radial-gradient(58% 46% at 50% 46%,rgba(30,91,70,.05),rgba(30,91,70,0) 72%)}
+
+/* ---------- 导航 ---------- */
+.nav{
+  position:fixed;z-index:20;
+  left:var(--pad-out);right:calc(var(--stage) + var(--pad-in));
+  bottom:3.4vh;
+  display:flex;align-items:center;gap:1.2vw;
+  font-family:var(--mono);font-size:clamp(9.5px,1vmin,11.5px);
+  letter-spacing:.1em;color:var(--mute);
+}
+body.stage-left .nav{left:calc(var(--stage) + var(--pad-in));right:var(--pad-out)}
+.nav .arrows{display:flex;gap:6px}
+.nav .arrows button{
+  width:2.4em;height:2.4em;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;font-size:1.05em;color:var(--ink);
+  transition:background .25s,border-color .25s,opacity .25s,transform .3s var(--ease);
+}
+.nav .arrows button:hover:not(:disabled){background:rgba(30,91,70,.07);border-color:rgba(30,91,70,.3)}
+.nav .arrows button:active:not(:disabled){transform:scale(.92)}
+.nav .arrows button:disabled{opacity:.25;cursor:default}
+
+.ticks{display:flex;gap:4px;flex:0 0 auto}
+.ticks button{
+  width:clamp(10px,1.05vw,17px);height:2px;background:rgba(22,53,43,.16);
+  transition:background .35s,width .35s var(--ease);
+}
+.ticks button.done{background:rgba(30,91,70,.55)}
+.ticks button.on{background:var(--amber);width:clamp(18px,1.9vw,30px)}
+
+.counter{font-variant-numeric:tabular-nums;white-space:nowrap}
+.hints{margin-left:auto;display:flex;gap:1vw;opacity:.75}
+.hints button{letter-spacing:.08em;transition:color .2s,opacity .2s}
+.hints button:hover{color:var(--green)}
+.hints button.on{color:var(--amber)}
+body.chrome-off .nav,
+body.chrome-off .stage-tag,
+body.chrome-off .stage-hint,
+body.chrome-off .brackets i{opacity:0;pointer-events:none}
+
+/* ---------- 讲稿 ---------- */
+.notes{
+  position:fixed;z-index:30;
+  left:var(--pad-out);bottom:calc(3.4vh + 3.2em);
+  width:min(38vw,520px);
+  background:rgba(247,245,236,.97);
+  border:1px solid var(--line);
+  border-radius:6px;padding:16px 20px 18px;
+  box-shadow:0 18px 48px rgba(22,53,43,.12);
+  opacity:0;translate:0 8px;pointer-events:none;
+  transition:opacity .3s var(--ease),translate .3s var(--ease);
+}
+body.stage-left .notes{left:calc(var(--stage) + var(--pad-in))}
+.notes.on{opacity:1;translate:0 0;pointer-events:auto}
+.notes .nh{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+  display:flex;justify-content:space-between;
+}
+.notes p{font-size:13.5px;line-height:1.85;color:var(--ink-2)}
+
+/* ---------- 校准 ---------- */
+.calib{position:fixed;inset:0;z-index:40;pointer-events:none;display:none}
+body.calib-on .calib{display:block}
+.calib .grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(to right,rgba(180,118,47,.13) 1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(180,118,47,.13) 1px,transparent 1px);
+  background-size:100px 100px;
+}
+.calib .zone{
+  position:absolute;top:8%;bottom:8%;
+  border:1px dashed rgba(180,118,47,.7);
+  background:rgba(180,118,47,.05);
+}
+body:not(.stage-left) .calib .zone{left:calc(100% - var(--stage));right:0}
+body.stage-left .calib .zone{left:0;right:calc(100% - var(--stage))}
+.calib .lab{
+  position:absolute;top:50%;left:50%;translate:-50% -50%;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  color:#8A5416;background:rgba(247,245,236,.92);
+  padding:8px 12px;border:1px solid rgba(180,118,47,.4);border-radius:3px;
+  text-align:center;line-height:1.9;white-space:pre;
+}
+
+/* ---------- 动效 ---------- */
+@media screen and (prefers-reduced-motion:no-preference){
+  /* 只在关键帧里做隐藏，动画失效时内容仍然是可见的 */
+  .slide.on .r{
+    animation:rise .8s var(--ease) both;
+    animation-delay:var(--d,0ms);
+  }
+  @keyframes rise{
+    from{opacity:0;translate:0 18px;filter:blur(4px)}
+    to{opacity:1;translate:0 0;filter:blur(0)}
+  }
+  .slide.on .rings span{animation:ringin 1.4s var(--ease) both}
+  .slide.on .rings span:nth-child(2){animation-delay:.08s}
+  .slide.on .rings span:nth-child(3){animation-delay:.16s}
+  .slide.on .rings span:nth-child(4){animation-delay:.24s}
+  @keyframes ringin{from{opacity:0;scale:.86}to{opacity:1;scale:1}}
+  .week .d.lit b{position:relative}
+  .week .d.lit b::after{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    box-shadow:0 0 22px 5px rgba(180,118,47,.36);
+    opacity:.16;animation:glow 3.4s ease-in-out infinite alternate;
+  }
+  .week .d:nth-child(1) b::after{animation-delay:0ms}
+  .week .d:nth-child(2) b::after{animation-delay:260ms}
+  .week .d:nth-child(3) b::after{animation-delay:520ms}
+  .week .d:nth-child(5) b::after{animation-delay:780ms}
+  .week .d:nth-child(6) b::after{animation-delay:1040ms}
+  .week .d:nth-child(7) b::after{animation-delay:1300ms}
+  @keyframes glow{from{opacity:.12}to{opacity:.62}}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .r{opacity:1!important}
+}
+
+/* ---------- 键盘焦点 ---------- */
+button:focus-visible{
+  outline:2px solid var(--amber);
+  outline-offset:3px;
+  border-radius:4px;
+}
+.ticks button:focus-visible{outline-offset:5px}
+
+/* ---------- 自适应 ---------- */
+@media (max-width:1100px){
+  :root{--stage:34%;--pad-out:6vw;--pad-in:3vw}
+  .trio{grid-template-columns:1fr;gap:0;margin-top:3vh}
+  .trio > div{padding:1.6vh 0;border-top:1px solid var(--line-2)}
+  .trio .idx{margin-bottom:.8vh}
+  .grid28{max-width:60%}
+}
+@media (max-width:820px){
+  :root{--stage:0%;--pad-out:6vw;--pad-in:6vw}
+  .slide{grid-template-columns:1fr}
+  .stage{display:none}
+  .nav{left:6vw;right:6vw}
+  .hints{display:none}
+  .trio p,.row p,.tl .d{font-size:13px}
+}
+
+/* ---------- 打印 ---------- */
+@media print{
+  body{overflow:visible;background:#fff}
+  body::after{display:none}
+  .deck{position:static}
+  .slide{position:relative;inset:auto;height:100vh;opacity:1!important;visibility:visible!important;
+         break-after:page;page-break-after:always}
+  .nav,.notes,.calib{display:none!important}
+  .r{opacity:1!important;animation:none!important}
+  .cover,.end{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main class="deck" id="deck">
+
+<!-- ============ 01 封面 ============ -->
+<section class="slide cover on"
+  data-note="开场 25 秒。右侧就是模拟器本体，不用切窗口——评委第一眼看到的是真机在跑。说：这是一款离线可用的绿色生活账本，记录、解释、反馈三件事放在同一本账里。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 碳小步 · 绿色生活账本</div>
+      <span>答辩演示 / 2026</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:80ms">Carbon Footprint · OpenHarmony</p>
+      <h1 class="r" style="--d:160ms">让每一次<br>低碳行动<br><em>都有回响。</em></h1>
+      <p class="lead r" style="--d:320ms">一款完全离线的 OpenHarmony 原生应用：把日常的小行动记进账本，把每一个数字的依据留在身边，让坚持这件事有迹可循。</p>
+      <div class="kicker r" style="--d:440ms">
+        <span>第三届河南省高校信创大赛</span>
+        <span>赛题二 · 碳足迹</span>
+        <span>ArkTS / ArkUI</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span>记录 · 解释 · 反馈</span>
+      <span>本地优先 · 无需账号</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="rings"><span></span><span></span><span></span><span></span></div>
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">真机画面 · 实时同步</span>
+  </aside>
+</section>
+
+<!-- ============ 02 背景 ============ -->
+<section class="slide"
+  data-note="35 秒。三个断点快速带过，不要逐条念。落点一句话：我们把问题收窄成「记录—解释—反馈」这条闭环。本页不操作，让画面停在总览页。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 项目背景</div>
+      <span>01 / Why</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">The Gap</p>
+      <h2 class="r" style="--d:130ms">低碳生活，<br>常常停在<em>「想一想」</em>。</h2>
+      <p class="lead r" style="--d:250ms">行动发生在细节里：少开一盏灯、少剩半份饭、把旧手机交出去。但这些事很少被留下来，也很难被解释清楚。</p>
+      <div class="trio">
+        <div class="r" style="--d:380ms">
+          <span class="idx">01 — 做了，没留下</span>
+          <h3>做过的事，散落在日常里</h3>
+          <p>回看时只记得「好像做过」，说不清做过多少、什么时候做的。</p>
+        </div>
+        <div class="r" style="--d:470ms">
+          <span class="idx">02 — 有数字，没依据</span>
+          <h3>有数字，却说不清怎么算</h3>
+          <p>数字一旦脱离来源和适用条件，就很难被信任，也无法复核。</p>
+        </div>
+        <div class="r" style="--d:560ms">
+          <span class="idx">03 — 有热情，难坚持</span>
+          <h3>缺少积累，也很难走远</h3>
+          <p>没有反馈的坚持，往往在第三周就悄悄停止了。</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>我们的落点：把「记录 → 解释 → 反馈」做成一条闭环</span>
+      <span>02</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">本页不需要演示<br>模拟器可以停在这里</span>
+  </aside>
+</section>
+
+<!-- ============ 03 产品方案 ============ -->
+<section class="slide"
+  data-note="40 秒。讲「一本账、三个动作」。顺手在右侧点一遍底部五栏，让评委知道结构，每栏停 2 秒即可。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 产品方案</div>
+      <span>02 / Solution</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">One Journal, Three Moves</p>
+      <h2 class="r" style="--d:130ms">一本账本，<br><em>三个动作</em>。</h2>
+      <div class="rows">
+        <div class="row r" style="--d:280ms">
+          <div class="num">01<span class="en">Record</span></div>
+          <div>
+            <h3>记录一次真实行动</h3>
+            <p>选场景、填有依据的数量、看清核算依据，再保存成一条可查询的本地记录。</p>
+          </div>
+        </div>
+        <div class="row r" style="--d:370ms">
+          <div class="num">02<span class="en">See</span></div>
+          <div>
+            <h3>看见变化，也看见理由</h3>
+            <p>按时间与类别查看趋势，点开任意一条都能回到它的因子、假设与来源。</p>
+          </div>
+        </div>
+        <div class="row r" style="--d:460ms">
+          <div class="num">03<span class="en">Keep</span></div>
+          <div>
+            <h3>让坚持有一点仪式感</h3>
+            <p>正减排行动点亮七日火花，每日任务与虚拟奖励把「再做一次」变得具体。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>五个主入口：总览 / 记录 / 统计 / 任务 / 我的</span>
+      <span>03</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">可演示：底部五栏切换<br>约 10 秒</span>
+  </aside>
+</section>
+
+<!-- ============ 04 核心体验 ============ -->
+<section class="slide dark"
+  data-note="50 秒 + 实演。全场最重要的一页。讲完四步，直接在右侧画面上点「记录今天的行动」→ 选节约用电 → 输入 1 → 看预览 0.531 kg → 保存 → 回到列表。动作放慢，让评委看清数字怎么来的。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 核心体验</div>
+      <span>03 / Experience</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">From Action To Insight</p>
+      <h2 class="r" style="--d:130ms">一次行动的<br><em>四步旅程</em>。</h2>
+      <div class="timeline">
+        <div class="tl r" style="--d:280ms">
+          <div><div class="t">选择行动</div><div class="d">节电、少用汽油、减少猪肉浪费、闲置手机再利用——每类至少一条有来源、边界可说明的规则。</div></div>
+          <div class="n">01</div>
+        </div>
+        <div class="tl r hot" style="--d:360ms">
+          <div><div class="t">确认与预览 <span class="chip">现场演示</span></div><div class="d">输入有依据的数量，先看到结果、因子与适用条件，确认后才写入。</div></div>
+          <div class="n">02</div>
+        </div>
+        <div class="tl r" style="--d:440ms">
+          <div><div class="t">保存到本机</div><div class="d">记录连同当时的因子快照一起落库；可查询、可更正、可撤销，重启不丢。</div></div>
+          <div class="n">03</div>
+        </div>
+        <div class="tl r" style="--d:520ms">
+          <div><div class="t">形成反馈</div><div class="d">统计与火花即时更新，任务进度按真实记录计算，积分由用户主动领取。</div></div>
+          <div class="n">04</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>边界：输入的是「差值」，不是总用电量、总耗油或出行公里数</span>
+      <span>04</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 正在演示</span>
+    <span class="stage-hint">模拟器操作区<br>建议停留 60–90 秒</span>
+  </aside>
+</section>
+
+<!-- ============ 05 创新 01 ============ -->
+<section class="slide"
+  data-note="45 秒。核心不是算得准，而是算得清。可以点开刚保存的那条记录，展开因子与来源。评委常问「数据从哪来」——这一页就是答案。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 创新点 / 01</div>
+      <span>04 / Transparency</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">Traceable Estimate</p>
+      <h2 class="r" style="--d:130ms">数字有依据，<br><em>历史可追溯</em>。</h2>
+      <div class="eqcard r" style="--d:260ms">
+        <div class="mini">示例 · 已确认节约外购电量</div>
+        <div class="eq">1 kWh <s>×</s> 0.5306 <s>=</s> <b>0.531</b><u>kg CO₂e</u></div>
+        <div class="snapshot">
+          <span class="mini">来源</span>
+          <span class="snap-chip">2023 全国平均电力因子</span>
+          <span class="snap-chip">单条末尾按克舍入</span>
+        </div>
+        <p class="note" style="margin-top:2.2vh">只输入有依据确认的节电差值，不是总用电量；结果是给定条件下的参考估算，不是实时边际排放，也不是核证减排量。</p>
+      </div>
+      <div class="snapshot r" style="--d:400ms">
+        <span class="mini">历史快照</span>
+        <span class="snap-chip">catalog v1.0</span>
+        <span class="arr">→</span>
+        <span class="snap-chip">catalog v1.1</span>
+        <span class="arr">→</span>
+        <span class="snap-chip freezed">旧记录仍按当时因子呈现</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span>规则版本升级不会静默改写历史记录</span>
+      <span>05</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">可演示：记录详情里的<br>因子与来源展开</span>
+  </aside>
+</section>
+
+<!-- ============ 06 创新 02 ============ -->
+<section class="slide"
+  data-note="45 秒。讲「为什么愿意回来」。在右侧点任务页，展示积分要主动领取、火花按天点亮。注意：只认正减排，同一天只点亮一次。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 创新点 / 02</div>
+      <span>05 / Habit Loop</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">A Small Spark Every Day</p>
+      <h2 class="r" style="--d:130ms">让坚持，<br>有一点<em>仪式感</em>。</h2>
+      <div class="sparkwrap r" style="--d:260ms">
+        <div class="week">
+          <div class="d lit"><b>✦</b><i>一</i></div>
+          <div class="d lit"><b>✦</b><i>二</i></div>
+          <div class="d lit"><b>✦</b><i>三</i></div>
+          <div class="d"><b>·</b><i>四</i></div>
+          <div class="d lit"><b>✦</b><i>五</i></div>
+          <div class="d lit"><b>✦</b><i>六</i></div>
+          <div class="d lit"><b>✦</b><i>日</i></div>
+        </div>
+        <div class="sparkcap">七日行动 · 同一天多次记录只点亮一次</div>
+      </div>
+      <p class="note r" style="--d:400ms;margin-top:4vh">只有产生正减排的有效记录才点亮；断签不清零，从下一次行动重新开始。<br>任务积分需要用户主动领取，记录被更正或撤销时按规则回退并对账。</p>
+    </div>
+    <div class="foot">
+      <span>积分是虚拟反馈，不代表现金收益、实际植树或官方认证</span>
+      <span>06</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">可演示：任务页领取积分<br>与火花点亮</span>
+  </aside>
+</section>
+
+<!-- ============ 07 创新 03 ============ -->
+<section class="slide"
+  data-note="45 秒。工程能力页。界面只调业务接口，核算不碰数据库，跨记录、任务、积分的写入走同一事务。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 创新点 / 03</div>
+      <span>06 / Engineering</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">Built To Be Trusted</p>
+      <h2 class="r" style="--d:130ms">离线优先，<br>边界<em>清晰</em>。</h2>
+      <div class="arch r" style="--d:260ms">
+        <div class="node"><b>ArkUI 页面</b><small>只调用公共业务接口</small></div>
+        <div class="to">→</div>
+        <div class="node acc"><b>业务服务</b><small>核算 / 任务 / 统计 / 备份</small></div>
+        <div class="to">→</div>
+        <div class="node"><b>RDB 本机库</b><small>记录 · 积分流水 · 奖励</small></div>
+      </div>
+      <div class="bracket r" style="--d:340ms">跨记录 · 任务 · 积分的写入走同一事务，提交成功后只通知一次</div>
+      <div class="duo">
+        <div class="r" style="--d:420ms">
+          <h3>不需要账号，也能用完整流程</h3>
+          <p>记录、统计、任务、科普、备份全部在本机完成；没有网络时，核心流程照常运行。</p>
+        </div>
+        <div class="r" style="--d:500ms">
+          <h3>可更正，也可对账</h3>
+          <p>更正或撤销后，关联积分同步回退；备份带版本与校验，CSV 报表可直接核对。</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>核算不写库 · 仓储不定义积分 · UI 不拼 SQL</span>
+      <span>07</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">可演示：我的 → 数据管理<br>备份检查</span>
+  </aside>
+</section>
+
+<!-- ============ 08 家庭 ============ -->
+<section class="slide"
+  data-note="40 秒 + 实演。在右侧切到家庭账本，点「妈妈」筛选，再点参与接力。同时诚实说明：多设备同步还没接，现在跑的是同一套原生界面。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 家庭绿色账本</div>
+      <span>07 / Family</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">Family Green Journal</p>
+      <h2 class="r" style="--d:130ms">从一个人的小步，<br>到<em>一家人的接力</em>。</h2>
+      <p class="lead r" style="--d:250ms">一家人的小行动，合起来才是大改变。用成员动态看见彼此的贡献，用一条绿色任务把日常串成接力。</p>
+      <div class="relaymeta r" style="--d:330ms"><span>接力进度</span><span>2 / 3 人（示例）</span></div>
+      <div class="relaybar r" style="--d:330ms"><div></div></div>
+      <div class="duo" style="margin-top:3.4vh">
+        <div class="r" style="--d:420ms">
+          <h3>已经能跑的部分</h3>
+          <p>进入与返回、成员筛选、接力参与与撤回，均已在模拟器上实测。</p>
+        </div>
+        <div class="r" style="--d:500ms">
+          <h3>还没接的部分</h3>
+          <p>多设备同步与真实账号体系仍在路线图上，当前是单机前端体验。</p>
+        </div>
+      </div>
+      <div class="r" style="--d:570ms;margin-top:2.6vh;display:flex;gap:.6vw;flex-wrap:wrap">
+        <span class="chip">前端交互已实现</span>
+        <span class="chip off">多设备同步待接入</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span>示例数据仅用于展示界面，不写入账本</span>
+      <span>08</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 正在演示</span>
+    <span class="stage-hint">模拟器：家庭账本 → 筛选妈妈<br>→ 参与接力</span>
+  </aside>
+</section>
+
+<!-- ============ 09 验证 ============ -->
+<section class="slide"
+  data-note="40 秒。不要念数字，讲证据链：源码 → 编译 → 安装 → 真实交互。最后主动交代边界（真机、API 12 参考镜像、发布签名）。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 实施与验证</div>
+      <span>08 / Delivery</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">Evidence, Not Claims</p>
+      <h2 class="r" style="--d:130ms">每一层，都留下<em>证据</em>。</h2>
+      <div class="evidence">
+        <div class="ev r" style="--d:250ms">
+          <span class="dot"></span><span class="k">编译</span>
+          <span class="v">ArkTS / ArkUI Stage 工程，主 HAP 原生构建通过，无三方运行时依赖</span>
+          <span class="s"><b>通过</b></span>
+        </div>
+        <div class="ev r" style="--d:320ms">
+          <span class="dot"></span><span class="k">规则与事务</span>
+          <span class="v">本地单元与规则测试，覆盖核算、事务回滚、积分对账</span>
+          <span class="s"><b>51 / 51</b></span>
+        </div>
+        <div class="ev r" style="--d:390ms">
+          <span class="dot"></span><span class="k">设备隔离</span>
+          <span class="v">API 26 模拟器上的隔离数据库测试，含篡改拒绝与负余额场景</span>
+          <span class="s"><b>14/14 · 9/9</b></span>
+        </div>
+        <div class="ev r" style="--d:460ms">
+          <span class="dot"></span><span class="k">真实交互</span>
+          <span class="v">记录保存与重启读回、统计图表、任务领取、家庭筛选与接力</span>
+          <span class="s"><b>已实测</b></span>
+        </div>
+        <div class="ev r" style="--d:530ms">
+          <span class="dot warn"></span><span class="k">待补齐</span>
+          <span class="v">物理真机、API 12 参考镜像、发布签名与恢复流程的最终界面确认</span>
+          <span class="s">进行中</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>目标 SDK API 12；当前运行验证限 HarmonyOS API 26 商业模拟器</span>
+      <span>09</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">本页不需要演示<br>可切到统计页停留</span>
+  </aside>
+</section>
+
+<!-- ============ 10 结束 ============ -->
+<section class="slide end"
+  data-note="收尾 30 秒。慢一点。说完停住，画面留给评委——右侧还亮着应用，是最好的结束画面。">
+  <div class="content">
+    <div class="top">
+      <div class="brand"><i>✳</i> 碳小步 · 绿色生活账本</div>
+      <span>Thank You</span>
+    </div>
+    <div class="main">
+      <p class="eyebrow r" style="--d:60ms">Small Actions, Lasting Change</p>
+      <h2 class="r" style="--d:150ms">每一点改变，<br>都值得<em>被看见</em>。</h2>
+      <p class="lead r" style="--d:300ms">让低碳成为可理解、可记录、可持续的日常选择。</p>
+      <div class="rule r" style="--d:380ms"></div>
+      <p class="note r" style="--d:440ms">感谢各位评委聆听 · 欢迎提问</p>
+    </div>
+    <div class="foot">
+      <span>碳小步 / 绿色生活账本</span>
+      <span>10</span>
+    </div>
+  </div>
+  <aside class="stage" aria-hidden="true">
+    <div class="brackets"><i></i><i></i><i></i><i></i></div>
+    <span class="stage-tag"><b>Live</b> · 演示舞台</span>
+    <span class="stage-hint">保持应用停留在总览页</span>
+  </aside>
+</section>
+
+</main>
+
+<!-- 讲稿 -->
+<div class="notes" id="notes">
+  <div class="nh"><span id="notesTitle">讲稿</span><span id="notesTime"></span></div>
+  <p id="notesBody"></p>
+</div>
+
+<!-- 校准层 -->
+<div class="calib" id="calib" aria-hidden="true">
+  <div class="grid"></div>
+  <div class="zone"><div class="lab" id="calibLab"></div></div>
+</div>
+
+<!-- 嵌入式模拟器画面 -->
+<div class="device" id="device" aria-hidden="true">
+  <div class="screen" id="screen">
+    <img id="live" alt="" draggable="false">
+    <span class="ripple" id="ripple"></span>
+  </div>
+</div>
+
+<!-- 导航 -->
+<nav class="nav" id="nav" aria-label="翻页">
+  <div class="arrows">
+    <button id="prev" aria-label="上一页">←</button>
+    <button id="next" aria-label="下一页">→</button>
+  </div>
+  <div class="ticks" id="ticks"></div>
+  <span class="counter" id="counter">01 / 10</span>
+  <div class="hints">
+    <button data-act="guides" title="显示/隐藏演示区辅助线">D 辅助线</button>
+    <button data-act="notes" title="显示/隐藏讲稿">N 讲稿</button>
+    <button data-act="restart" title="重启模拟器中的应用">R 重启</button>
+    <button data-act="full" title="全屏">F 全屏</button>
+  </div>
+</nav>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const total = slides.length;
+  const ticks = document.getElementById('ticks');
+  const counter = document.getElementById('counter');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const notes = document.getElementById('notes');
+  const notesBody = document.getElementById('notesBody');
+  const notesTime = document.getElementById('notesTime');
+  const notesTitle = document.getElementById('notesTitle');
+  const calib = document.getElementById('calib');
+  const calibLab = document.getElementById('calibLab');
+  let i = 0;
+
+  /* 进度刻度 */
+  slides.forEach((_, n) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', `跳到第 ${n + 1} 页`);
+    b.addEventListener('click', () => go(n));
+    ticks.appendChild(b);
+  });
+  const tickEls = [...ticks.children];
+
+  let guard = 0;
+  /* 保底：若入场动画因环境原因没能推进，1.5 秒后强制显示，避免整页空白 */
+  function armGuard(slide) {
+    clearTimeout(guard);
+    guard = setTimeout(() => {
+      slide.querySelectorAll('.r').forEach(el => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) {
+          el.style.animation = 'none';
+          el.style.opacity = '1';
+        }
+      });
+    }, 1500);
+  }
+
+  function go(n) {
+    i = Math.max(0, Math.min(total - 1, n));
+    slides.forEach((s, k) => {
+      s.classList.toggle('on', k === i);
+      s.setAttribute('aria-hidden', k !== i ? 'true' : 'false');
+      // 保底机制会写入内联 animation:none，离场后要还原，否则该页再也不会播放入场动画
+      if (k !== i) {
+        setTimeout(() => {
+          if (s.classList.contains('on')) return;   // 又翻回来了就别动它
+          s.querySelectorAll('.r').forEach(el => {
+            if (el.style.animation === 'none') {
+              el.style.animation = '';
+              el.style.opacity = '';
+            }
+          });
+        }, 620);
+      }
+    });
+    tickEls.forEach((t, k) => {
+      t.classList.toggle('done', k < i);
+      t.classList.toggle('on', k === i);
+    });
+    counter.textContent = `${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+    prev.disabled = i === 0;
+    next.disabled = i === total - 1;
+    const isDarkSlide = slides[i].classList.contains('dark') || slides[i].classList.contains('cover');
+    document.body.classList.toggle('on-dark', isDarkSlide);
+    armGuard(slides[i]);
+    placeDevice();
+    paintTag();
+    history.replaceState(null, '', '#' + (i + 1));
+    notesBody.textContent = slides[i].dataset.note || '';
+    notesTitle.textContent = (slides[i].querySelector('.brand')?.textContent || '讲稿').trim();
+    notesTime.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    if (document.body.classList.contains('calib-on')) updateCalib();
+  }
+
+  prev.addEventListener('click', () => go(i - 1));
+  next.addEventListener('click', () => go(i + 1));
+
+  /* 交互开关 */
+  const body = document.body;
+  const acts = {
+    guides() {
+      body.classList.toggle('no-guides');
+      syncAct('guides', !body.classList.contains('no-guides'));
+      store('guides', body.classList.contains('no-guides') ? '0' : '1');
+    },
+    notes() {
+      const on = notes.classList.toggle('on');
+      notes.setAttribute('aria-hidden', String(!on));
+      syncAct('notes', on);
+      const btn = document.querySelector('[data-act="notes"]');
+      if (btn) btn.setAttribute('aria-expanded', String(on));
+    },
+    side() {
+      body.classList.toggle('stage-left');
+      syncAct('side', body.classList.contains('stage-left'));
+      store('side', body.classList.contains('stage-left') ? '1' : '0');
+      if (body.classList.contains('calib-on')) updateCalib();
+    },
+    calib() {
+      body.classList.toggle('calib-on');
+      syncAct('calib', body.classList.contains('calib-on'));
+      if (body.classList.contains('calib-on')) updateCalib();
+    },
+    full() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen?.();
+        return;
+      }
+      const p = document.documentElement.requestFullscreen?.();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => flash('浏览器拒绝了全屏，请手动按 F11'));
+      } else if (!p) {
+        flash('当前浏览器不支持全屏，请手动按 F11');
+      }
+    },
+    restart() {
+      post('restart', {}).then(() => flash('已重启应用'));
+    }
+  };
+  function syncAct(name, on) {
+    const b = document.querySelector(`[data-act="${name}"]`);
+    if (b) b.classList.toggle('on', !!on);
+  }
+  function store(k, v) { try { localStorage.setItem('deck.' + k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem('deck.' + k); } catch (e) { return null; } }
+
+  document.querySelectorAll('[data-act]').forEach(b => {
+    b.addEventListener('click', () => acts[b.dataset.act]());
+  });
+
+  /* ---------------- 嵌入式模拟器 ---------------- */
+  const DEV = { w: 1320, h: 2232 };
+  const device = document.getElementById('device');
+  const screenEl = document.getElementById('screen');
+  const liveImg = document.getElementById('live');
+  const rippleEl = document.getElementById('ripple');
+  let isLive = false;
+  let lastFps = 0;
+  let down = null;
+
+  function placeDevice() {
+    const st = document.querySelector('.slide.on .stage');
+    if (!st) return;
+    const r = st.getBoundingClientRect();
+    const padY = Math.max(24, r.height * 0.1);
+    let h = r.height - padY * 2;
+    let w = h * DEV.w / DEV.h;
+    const maxW = r.width * 0.86;
+    if (w > maxW) { w = maxW; h = w * DEV.h / DEV.w; }
+    device.style.width = w + 'px';
+    device.style.height = h + 'px';
+    device.style.left = (r.left + (r.width - w) / 2) + 'px';
+    device.style.top = (r.top + (r.height - h) / 2) + 'px';
+  }
+
+  function paintTag() {
+    const tag = document.querySelector('.slide.on .stage-tag');
+    if (!tag) return;
+    tag.innerHTML = isLive
+      ? '<b>Live</b> · 实时画面 · ' + (lastFps ? Math.round(lastFps) + 'fps' : '连接中')
+      : '<b>Live</b> · 演示舞台';
+  }
+
+  let streamOn = false;
+  function setLive(on) {
+    if (on === isLive) return;
+    isLive = on;
+    if (on && !streamOn) { streamOn = true; liveImg.src = 'stream?' + Date.now(); }
+    document.body.classList.toggle('live', on);
+    paintTag();
+  }
+
+  async function pollState() {
+    try {
+      const r = await fetch('state', { cache: 'no-store' });
+      const j = await r.json();
+      lastFps = j.fps || 0;
+      setLive(!!j.ok);
+      if (isLive) paintTag();
+    } catch (e) {
+      setLive(false);
+    }
+  }
+
+  function post(path, data) {
+    return fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data || {})
+    }).catch(() => {});
+  }
+
+  function flash(msg) {
+    const old = document.getElementById('flash');
+    if (old) old.remove();
+    const el = document.createElement('div');
+    el.id = 'flash';
+    el.textContent = msg;
+    el.style.cssText =
+      'position:fixed;z-index:60;left:50%;bottom:11vh;transform:translateX(-50%);' +
+      'background:rgba(15,48,39,.92);color:#EFF3E4;padding:9px 16px;border-radius:20px;' +
+      'font-size:13px;letter-spacing:.04em;pointer-events:none;transition:opacity .4s';
+    document.body.appendChild(el);
+    setTimeout(() => { el.style.opacity = '0'; }, 1100);
+    setTimeout(() => el.remove(), 1600);
+  }
+
+  function ripple(x, y) {
+    const r = screenEl.getBoundingClientRect();
+    rippleEl.style.left = (x - r.left) + 'px';
+    rippleEl.style.top = (y - r.top) + 'px';
+    rippleEl.classList.remove('go');
+    void rippleEl.offsetWidth;
+    rippleEl.classList.add('go');
+  }
+
+  function toDevice(cx, cy) {
+    const r = liveImg.getBoundingClientRect();
+    return {
+      x: Math.round((cx - r.left) / r.width * DEV.w),
+      y: Math.round((cy - r.top) / r.height * DEV.h)
+    };
+  }
+
+  const clampNum = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  device.addEventListener('pointerdown', e => {
+    if (!isLive) return;
+    e.preventDefault();
+    down = { x: e.clientX, y: e.clientY, t: Date.now(), moved: false };
+    try { device.setPointerCapture(e.pointerId); } catch (err) {}
+    screenEl.style.transition = 'none';
+  });
+
+  device.addEventListener('pointermove', e => {
+    if (!down || !isLive) return;
+    const dx = e.clientX - down.x;
+    const dy = e.clientY - down.y;
+    if (!down.moved && Math.hypot(dx, dy) > 12) down.moved = true;
+    if (down.moved) {
+      // 阻尼跟手：拖动时画面轻微位移，给即时触感
+      screenEl.style.transform =
+        'translate(' + clampNum(dx * .45, -70, 70) + 'px,' +
+        clampNum(dy * .45, -70, 70) + 'px)';
+    }
+  });
+
+  device.addEventListener('pointerup', e => {
+    if (!isLive || !down) return;
+    const d = down;
+    down = null;
+    screenEl.style.transition = 'transform .24s cubic-bezier(.2,.8,.3,1)';
+    screenEl.style.transform = '';
+    if (!d.moved) {
+      ripple(d.x, d.y);
+      post('tap', toDevice(d.x, d.y));
+    } else {
+      const a = toDevice(d.x, d.y);
+      const b = toDevice(e.clientX, e.clientY);
+      sendScroll(b.y - a.y);
+    }
+  });
+
+  const SCROLL_STEP = 700;    // 直接拖拽时的上限（设备像素）
+  const WHEEL_STEP = 320;     // 滚轮/触控板一次最多走多少（设备像素）
+
+  function sendScroll(dy, lim) {
+    const cap = lim || SCROLL_STEP;
+    if (Math.abs(dy) < 30) return;
+    post('scroll', { dy: Math.round(clampNum(dy, -cap, cap)) });
+  }
+
+  /* 触控板两指 / 鼠标滚轮
+     关键：macOS 松手后还会继续发 1 秒左右的惯性事件，如果照单全收，
+     一次轻扫就会累加成一两千像素，表现为「滚一下翻好几页」。
+     所以每发一次就进入冷却，冷却期内的输入（主要是惯性）直接丢弃。 */
+  let wAcc = 0;
+  let wTimer = null;
+  let wLock = 0;
+
+  device.addEventListener('wheel', e => {
+    if (!isLive) return;
+    e.preventDefault();
+    if (performance.now() < wLock) return;
+    wAcc += e.deltaY;
+    if (wTimer) return;
+    wTimer = setTimeout(() => {
+      const dy = wAcc;
+      wAcc = 0;
+      wTimer = null;
+      if (Math.abs(dy) < 2) return;
+      // 一次手势的位移量：小幅滚动给下限，避免抖一下就整屏跳
+      const step = clampNum(Math.abs(dy) * 1.4, 70, WHEEL_STEP) * Math.sign(dy);
+      wLock = performance.now() + 430;
+      sendScroll(step);
+    }, 45);
+  }, { passive: false });
+
+  device.addEventListener('pointercancel', () => {
+    down = null;
+    screenEl.style.transform = '';
+  });
+  device.addEventListener('lostpointercapture', () => {
+    down = null;
+    screenEl.style.transform = '';
+  });
+  device.addEventListener('contextmenu', e => e.preventDefault());
+  liveImg.addEventListener('error', () => {
+    setLive(false);
+    streamOn = false;
+    liveImg.removeAttribute('src');
+  });
+  liveImg.addEventListener('load', () => { if (!isLive) pollState(); });
+
+  /* 校准读数 */
+  function updateCalib() {
+    // 从计算样式读真实占比，避免 CSS 改了这里没跟上
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--stage');
+    const pct = (parseFloat(raw) || 33) / 100;
+    const stageW = Math.round(window.innerWidth * pct);
+    calibLab.textContent =
+      `演示区  ${stageW} × ${Math.round(window.innerHeight * 0.84)} px\n` +
+      `视口  ${window.innerWidth} × ${window.innerHeight}\n` +
+      `把模拟器窗口拖到这里，宽高接近即可`;
+  }
+  window.addEventListener('resize', () => {
+    if (body.classList.contains('calib-on')) updateCalib();
+    placeDevice();
+  });
+
+  /* 键盘 */
+  document.addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key.toLowerCase();
+    // 焦点在按钮/输入框上时，空格与回车交给控件自己处理，避免又翻页又触发按钮
+    const onControl = e.target && e.target.closest &&
+      e.target.closest('button,input,textarea,select,a,[contenteditable]');
+    if (onControl && (k === ' ' || k === 'enter')) return;
+    if (k === 'arrowright' || k === 'pagedown' || k === ' ') { e.preventDefault(); go(i + 1); }
+    else if (k === 'arrowleft' || k === 'pageup') { e.preventDefault(); go(i - 1); }
+    else if (k === 'home') go(0);
+    else if (k === 'end') go(total - 1);
+    else if (k === 'd') acts.guides();
+    else if (k === 'n') acts.notes();
+    else if (k === 'l') acts.side();
+    else if (k === 'c') acts.calib();
+    else if (k === 'f') acts.full();
+    else if (k === 'h') body.classList.toggle('chrome-off');
+    else if (/^[1-9]$/.test(k)) go(Number(k) - 1);
+  });
+
+  /* 触屏 */
+  let tx = 0, ty = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) go(i + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* 恢复偏好 */
+  if (load('guides') === '0') { body.classList.add('no-guides'); syncAct('guides', false); } else syncAct('guides', true);
+  if (load('side') === '1') { body.classList.add('stage-left'); syncAct('side', true); }
+
+  go((Number(location.hash.slice(1)) || 1) - 1);
+  placeDevice();
+  pollState();
+  setInterval(pollState, 2500);
+})();
+</script>
+</body>
+</html>

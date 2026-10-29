@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "绿色生活碳足迹记录"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "碳足迹入口"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "碳小步"
+    },
+    {
+      "name": "internet_reason",
+      "value": "用于向用户自行配置的大模型服务提问，未配置时应用保持离线"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+Date: 2026-10-27 Asia/Shanghai
+User downloaded official Mac ARM package:
+/Users/ZZB/Downloads/Chrome/devecostudio-mac-arm-26.0.0.851.zip
+ZIP SHA-256 (calculated; official published SHA not independently retrieved):
+86289edeb2e8e30eb1adf80cba0fc55f0e57cdd4f6dc4ec9c59985a0bc4b8524
+Download origin metadata hosts: contentcenter-vali-drcn.dbankcdn.cn; developer.huawei.com
+unzip -tq: exit 0, No errors detected in compressed data.
+Inner DMG:
+/Users/ZZB/Downloads/Chrome/devecostudio-mac-arm-26.0.0.851/deveco-studio-26.0.0.851-aarch64.dmg
+hdiutil verify: exit 0, CRC32 A00B6D84 VALID.
+Read-only mounted by M00 at: /Volumes/DevEco-Studio 1
+App product-info.json: DevEco Studio 26.0.0.851
+Build: 261.23567.138.36.2600851
+Bundle ID: com.huawei.devecostudio.ds
+Executable: Mach-O 64-bit executable arm64
+codesign --verify --deep --strict --verbose=2 on mounted app:
+valid on disk; satisfies its Designated Requirement.
+Signing metadata:
+Authority=Developer ID Application: Huawei Device Co,. LTD (TZEA3TN37Q)
+Authority=Developer ID Certification Authority
+Authority=Apple Root CA
+Timestamp=Sep 22, 2026 at 08:45:02
+TeamIdentifier=TZEA3TN37Q
+User completed installation. Installed copy codesign and spctl both exited 0; see ide-validation.txt. IDE sync and HAP build succeeded after official model migration; see ide-ui-build.txt.
+No installed-copy failure should be read as a final package integrity failure:
+its path temporarily disappeared during the user's copy/replacement operation.

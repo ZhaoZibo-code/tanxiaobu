@@ -1,0 +1,4 @@
+127.0.0.1:5555
+26 
+OpenHarmony-7.0.0.105 
+emulator 7.0.0.107(SP8DEVC00E999R4P11) 

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "factors": [
+    {
+      "id": "cn-electricity-saved-2023",
+      "version": "1.0.0",
+      "name": "已节约电量对应的2023全国平均CO₂归因估算",
+      "unit": "kWh",
+      "gramsCo2ePerUnit": 530.6,
+      "originalValue": 0.5306,
+      "originalUnit": "kgCO2/kWh",
+      "source": {
+        "title": "2023年电力二氧化碳排放因子（公告2025年第47号附件，表1）",
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202512/W020251231726284332528.pdf",
+        "publisher": "生态环境部、国家统计局",
+        "publishedDate": "2025-12-31",
+        "retrievedDate": "2026-10-28",
+        "region": "中国全国平均口径（2023年）",
+        "boundary": "电力消费平均CO₂归因排放；只含CO₂，不含上游、设施生命周期及其他温室气体。",
+        "notes": "以有依据的已节约外购电量乘全国平均排放因子形成条件估算；不是官方直接减排系数、实时电网边际减排或绿电专属核算。CO₂的GWP为1，但本结果不代表完整生命周期CO₂e。"
+      },
+      "assumptions": [
+        "数量是同等服务水平下已确认节约的外购电量，不是节约后的总用电量。",
+        "采用2023全国平均，不宣称适用于任一省份的精确强度或当前电网。"
+      ],
+      "evidenceStatus": "documented"
+    },
+    {
+      "id": "sh-all-mode-baseline-2024",
+      "version": "1.0.0",
+      "name": "上海全方式平均出行基准CO₂因子",
+      "unit": "km",
+      "gramsCo2ePerUnit": 98,
+      "originalValue": 0.098,
+      "originalUnit": "kgCO2/PKM",
+      "source": {
+        "title": "上海市碳普惠减排场景方法学 互联网租赁自行车（SHCER02020032024Ⅰ，附录A）",
+        "url": "https://sthj.sh.gov.cn/cmsres/01/018e65d9d56a495baffc1b5f3ee6db55/2dab9f9b6d5f7d2e319a3f7558d7417c.pdf",
+        "publisher": "上海市生态环境局",
+        "publishedDate": "2024-03-13",
+        "retrievedDate": "2026-10-28",
+        "region": "上海市行政区域内，2021年能源及交通活动基期",
+        "boundary": "互联网租赁自行车相对全方式平均出行的运行CO₂边界；忽略CH₄、N₂O及制造、调度、维修等生命周期排放。",
+        "notes": "0.098kgCO₂/人公里是含步行、自行车、公交、小客车等全方式平均，不是小汽车排放因子。离线自填应用未实现原方法学的平台注册、授权、轨迹监测和唯一性核验，结果不构成核证减排。"
+      },
+      "assumptions": [
+        "每条数量只代表一名骑行者在上海行政区内的互联网租赁非电助力自行车有效里程。",
+        "不能取得起终点及最短路径时，按原文允许的平均路径转换系数缺省值1参考估算，不宣称已计算最短路径。"
+      ],
+      "evidenceStatus": "documented"
+    },
+    {
+      "id": "sh-shared-bicycle-operational-2024",
+      "version": "1.0.0",
+      "name": "上海互联网租赁自行车运行场景CO₂因子",
+      "unit": "km",
+      "gramsCo2ePerUnit": 0,
+      "originalValue": 0,
+      "originalUnit": "kgCO2/PKM",
+      "source": {
+        "title": "上海市碳普惠减排场景方法学 互联网租赁自行车（SHCER02020032024Ⅰ，式7及附录A）",
+        "url": "https://sthj.sh.gov.cn/cmsres/01/018e65d9d56a495baffc1b5f3ee6db55/2dab9f9b6d5f7d2e319a3f7558d7417c.pdf",
+        "publisher": "上海市生态环境局",
+        "publishedDate": "2024-03-13",
+        "retrievedDate": "2026-10-28",
+        "region": "上海市行政区域内，2021年能源及交通活动基期",
+        "boundary": "互联网租赁自行车相对全方式平均出行的运行CO₂边界；忽略CH₄、N₂O及制造、调度、维修等生命周期排放。",
+        "notes": "场景0仅为原方法学运行核算边界内忽略排放，不代表自行车生命周期零排放；不能用于电助力车或上海境外。"
+      },
+      "assumptions": [
+        "运行场景与基准采用同一方法学、地区、气体及人公里口径。"
+      ],
+      "evidenceStatus": "documented"
+    }
+  ],
+  "rules": [
+    {
+      "id": "saved-electricity-cn-2023",
+      "version": "1.0.0",
+      "category": "energy_water",
+      "name": "已节约外购电量（全国2023均值参考）",
+      "inputUnit": "kWh",
+      "minQuantity": 0.001,
+      "maxQuantity": 1000,
+      "mode": "direct_reduction",
+      "reductionFactorId": "cn-electricity-saved-2023",
+      "baselineFactorId": null,
+      "actualFactorId": null,
+      "baselineLabel": "同等服务水平下本来需要的外购电量",
+      "actualLabel": "已经减少的外购电量",
+      "assumptions": [
+        "只输入有依据确认的节电差值，不由使用时长猜测电量，不重复登记同一节电量。",
+        "数量区间是应用单条录入限制，不是来源研究给出的科学阈值。"
+      ],
+      "confirmationText": "我确认输入的是有依据的已节约外购电量而非总用电量，并理解结果仅按2023全国平均CO₂因子估算，不是实时边际减排或核证量。"
+    },
+    {
+      "id": "shared-bicycle-sh-2024",
+      "version": "1.0.0",
+      "category": "travel",
+      "name": "上海共享单车（全方式平均基准参考）",
+      "inputUnit": "km",
+      "minQuantity": 0.001,
+      "maxQuantity": 200,
+      "mode": "baseline_difference",
+      "reductionFactorId": null,
+      "baselineFactorId": "sh-all-mode-baseline-2024",
+      "actualFactorId": "sh-shared-bicycle-operational-2024",
+      "baselineLabel": "上海全方式平均出行，不是小汽车专属基准",
+      "actualLabel": "上海互联网租赁非电助力自行车运行场景",
+      "assumptions": [
+        "只计一名用户上海境内实际有效里程，不含跨界部分、健身绕行或重复登记。",
+        "参考缺省路径系数1；没有推断本次一定替代驾车，也没有验证订单或轨迹。",
+        "数量区间是应用单条录入限制，不是原方法学的科学阈值。"
+      ],
+      "confirmationText": "我确认这是本人在上海境内使用互联网租赁非电助力自行车的有效公里数；采用全方式平均基准和缺省路径系数1作参考，不代表本次替代小汽车，也不构成官方核证量。"
+    }
+  ]
+}

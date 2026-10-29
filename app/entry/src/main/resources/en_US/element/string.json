@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Carbon footprint journal"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Carbon footprint entry"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "碳足迹"
+    }
+  ]
+}

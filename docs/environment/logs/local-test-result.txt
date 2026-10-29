@@ -1,0 +1,4 @@
+clase=localUnitTest
+test=assertContain
+result=Success
+Tests run: 1, Failure: 0, Error: 0, Pass: 1, Ignore: 0

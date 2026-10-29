@@ -1,0 +1,69 @@
+Source manifest: 43/43 OK.
+app/.gitignore: OK
+app/.npmrc: OK
+app/.ohpmrc: OK
+app/AppScope/app.json5: OK
+app/AppScope/resources/base/element/string.json: OK
+app/AppScope/resources/base/media/app_icon.png: OK
+app/LICENSE: OK
+app/README.md: OK
+app/build-profile.json5: OK
+app/entry/.gitignore: OK
+app/entry/build-profile.json5: OK
+app/entry/hvigorfile.ts: OK
+app/entry/obfuscation-rules.txt: OK
+app/entry/oh-package.json5: OK
+app/entry/src/main/ets/entryability/EntryAbility.ets: OK
+app/entry/src/main/ets/pages/Index.ets: OK
+app/entry/src/main/module.json5: OK
+app/entry/src/main/resources/base/element/color.json: OK
+app/entry/src/main/resources/base/element/string.json: OK
+app/entry/src/main/resources/base/media/icon.png: OK
+app/entry/src/main/resources/base/media/startIcon.png: OK
+app/entry/src/main/resources/base/profile/main_pages.json: OK
+app/entry/src/main/resources/en_US/element/string.json: OK
+app/entry/src/main/resources/zh_CN/element/string.json: OK
+app/entry/src/ohosTest/ets/test/Ability.test.ets: OK
+app/entry/src/ohosTest/ets/test/List.test.ets: OK
+app/entry/src/ohosTest/ets/testability/TestAbility.ets: OK
+app/entry/src/ohosTest/ets/testability/pages/Index.ets: OK
+app/entry/src/ohosTest/ets/testrunner/OpenHarmonyTestRunner.ets: OK
+app/entry/src/ohosTest/module.json5: OK
+app/entry/src/ohosTest/resources/base/element/color.json: OK
+app/entry/src/ohosTest/resources/base/element/string.json: OK
+app/entry/src/ohosTest/resources/base/profile/test_pages.json: OK
+app/entry/src/test/List.test.ets: OK
+app/entry/src/test/LocalUnit.test.ets: OK
+app/hvigor/hvigor-config.json5: OK
+app/hvigorfile.ts: OK
+app/hvigorw: OK
+app/oh-package-lock.json5: OK
+app/oh-package.json5: OK
+app/scripts/env.sh: OK
+app/scripts/inspect-artifacts.py: OK
+app/scripts/ohpm: OK
+
+Final artifacts:
+/Users/ZZB/Desktop/game/app/entry/build/default/outputs/default/entry-default-unsigned.hap
+SHA-256: a421dd6284a231640df7b8898595b2b953d3b3a66e332df536d66b46d5ec83d8
+bytes: 82559
+bundle: com.carbonfootprint.app; module: entry; SDK: OpenHarmony 5.0.0.71; min/target API: 12/12
+ets/modules.abc bytes: 10688
+Signing: unsigned; runtime validation is recorded separately.
+
+/Users/ZZB/Desktop/game/app/entry/build/default/outputs/ohosTest/entry-ohosTest-unsigned.hap
+SHA-256: c32cf7a6f373be01b1ec0a2bb977341fd729c3e2286ea2ffaeb0a62ea3cbfc3d
+bytes: 1031530
+bundle: com.carbonfootprint.app; module: entry_test; SDK: OpenHarmony 5.0.0.71; min/target API: 12/12
+ets/modules.abc bytes: 220712
+Signing: unsigned; runtime validation is recorded separately.
+
+
+Retained native layout handoff-ui-zero.json: 按钮点击次数：0
+Retained native layout handoff-ui-1.json: 按钮点击次数：1
+Retained native layout handoff-ui-2.json: 按钮点击次数：2
+Retained native layout handoff-ui-restart.json: 按钮点击次数：0
+Required build/runtime evidence and referenced current document sections: present.
+hdc after intentional emulator stop: 127.0.0.1:5555
+Emulator/QEMU process inspection: 97139 /Applications/DevEco-Studio.app/Contents/tools/emulator/Emulator
+97173 /Applications/DevEco-Studio.app/Contents/tools/emulator/emulator-crash-service

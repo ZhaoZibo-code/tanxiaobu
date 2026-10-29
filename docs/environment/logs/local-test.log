@@ -1,0 +1,17 @@
+> hvigor [32mUP-TO-DATE :entry:default@GenerateUnitTestTemplate...  [39m
+> hvigor [32mFinished :entry:default@CreateBuildProfile... after 3 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@PreBuild...  [39m
+> hvigor [32mFinished :entry:default@GenerateLoaderJson... after 4 ms [39m
+> hvigor [32mFinished :entry:default@MergeProfile... after 3 ms [39m
+> hvigor [32mFinished :entry:default@ProcessProfile... after 53 ms [39m
+> hvigor [32mFinished :entry:default@UnitTestProcessProfile... after 1 ms [39m
+> hvigor [32mFinished :entry:default@ProcessResource... after 5 ms [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 36 ms [39m
+> hvigor [32mFinished :entry:default@ReplaceUnitTestIndexFile... after 3 ms [39m
+> hvigor [32mFinished :entry:default@BuildUnitTestHook... after 1 ms [39m
+> hvigor [32mFinished :entry:default@UnitTestArkTS... after 3 s 40 ms [39m
+> hvigor [32mFinished :entry:default@GenerateUnitTestResult... after 812 ms [39m
+> hvigor [32mFinished :entry:test... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 4 s 671 ms [39m
+
+EXIT_CODE=0

@@ -1,0 +1,21 @@
+M00 final handoff observation, 2026-10-27 local time.
+
+Source manifest after handoff text/script changes: 43/43 OK.
+CLI-built and tested main HAP SHA-256: 78cd6bc4ceeeb03cccab095e28bf3347c5ffdc1eda4c0c709ceec9bae503c899
+Test HAP SHA-256, unchanged: c32cf7a6f373be01b1ec0a2bb977341fd729c3e2286ea2ffaeb0a62ea3cbfc3d
+Final on-disk main HAP SHA-256: a421dd6284a231640df7b8898595b2b953d3b3a66e332df536d66b46d5ec83d8
+Final main HAP modification time: 2026-10-27T23:10:11.920620.
+Size/ABC bytes remain 82559/10688; metadata OpenHarmony 5.0.0.71, min/target API 12.
+The final on-disk main package was not reinstalled/run by this conversation. Earlier runtime results bind the recorded CLI-built package, not the replacement SHA.
+
+Official stop command returned: Stop emulator M00Compatibility successfully.
+Our terminal tab c1 was closed; the user's Terminal 1 was untouched.
+Later process observation: Emulator PID 97139, parent PID 5783, start 23:10:05.
+Parent executable: /Applications/DevEco-Studio.app/Contents/MacOS/devecostudio
+The same instance reconnected at 127.0.0.1:5555. The replacement process, HAP and regenerated cache/intermediates were preserved; no further stop or deletion.
+A read-only sha256sum query for the installed entry.hap returned Permission denied. No privilege escalation or bypass attempted.
+No attribution to a specific user action is asserted.
+
+Build/runtime logs, controlled UI layouts 0/1/2/restart0, final outputs, source, dependencies and IDE settings retained.
+Pre-existing predecessor migration backup /tmp/m00-before-ide-migration retained.
+No M01+ implementation, shared task-board/memory edits, Git initialization or commit.

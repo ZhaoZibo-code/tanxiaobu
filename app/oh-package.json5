@@ -1,0 +1,13 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "carbon-footprint",
+  "version": "1.0.0",
+  "description": "M00 OpenHarmony environment verification",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.15"
+  }
+}

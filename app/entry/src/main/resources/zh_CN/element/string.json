@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "绿色生活碳足迹记录"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "碳足迹入口"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "碳足迹"
+    }
+  ]
+}
